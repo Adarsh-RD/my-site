@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowDown, Sparkles, Phone } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
+import Image from 'next/image';
+import myImage from '@/images/my_image.jpg';
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -94,9 +96,14 @@ export function Hero() {
           </div>
 
           <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-[#e84855]/30">
-            <div className="w-full h-full bg-gradient-to-br from-[#1a1520] to-[#0d0b12] flex items-center justify-center">
-              <span className="text-5xl font-bold text-gradient-primary">AD</span>
-            </div>
+            <Image
+              src={myImage}
+              alt="Adarsh R D"
+              fill
+              className="object-cover"
+              sizes="128px"
+              priority
+            />
           </div>
         </motion.div>
 
