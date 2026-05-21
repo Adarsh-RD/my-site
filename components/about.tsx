@@ -55,7 +55,7 @@ export function About() {
             </p>
 
             <p className="text-[#9a95a8] text-lg leading-relaxed">
-              At Infosys, I built real-time anomaly detection pipelines with Apache Kafka, optimized BigQuery SQL queries cutting report times from 12s to 3.8s, and shipped a feature flag microservice with zero downtime — all in a cross-functional team of 8 engineers.
+              At Infosys (Project Intern, Aug 2025 — Jan 2026), I led development of the Cross-System Identity Resolution Engine — a privacy-preserving platform that links Aadhaar, ABHA, DigiLocker, and mobile identities using blinded indexing, zero-knowledge proofs, consent APIs, and tamper-evident audit logs, as part of the KLE Tech × Infosys industry SoW.
             </p>
 
             <p className="text-[#9a95a8] text-lg leading-relaxed">

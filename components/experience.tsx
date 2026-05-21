@@ -17,11 +17,11 @@ export function Experience() {
       location: 'Hubli, India',
       period: 'Aug 2025 — Jan 2026',
       bullets: [
-        'Developed a real-time anomaly detection pipeline using Apache Kafka and Python, reducing false-positive alert rates by 34% across production monitoring dashboards.',
-        'Optimised SQL query execution plans in BigQuery, cutting average report generation time from 12s to 3.8s for a high-traffic internal analytics tool used by 400+ engineers.',
-        'Collaborated with a cross-functional team of 8 to ship a feature flag management microservice, enabling safe A/B testing rollouts with zero downtime.',
+        'Built a Cross-System Identity Resolution Engine for the Infosys SoW — securely linking Aadhaar, ABHA, DigiLocker, and mobile identities with privacy-preserving record linkage (no raw IDs stored or shared).',
+        'Implemented HMAC-SHA256 hashing with per-identity salts, blinded O(1) indexing, and Pedersen-style zero-knowledge proofs so authorized apps can verify same-person linkages without exposing underlying identifiers.',
+        'Shipped REST APIs for link, verify, unlink, and consent management with JWT auth, policy-based access controls, and tamper-evident hash-chain audit trails; delivered the reference app and technical white-paper.',
       ],
-      technologies: ['Python', 'Apache Kafka', 'BigQuery', 'SQL', 'Microservices'],
+      technologies: ['Node.js', 'Express', 'MongoDB', 'Cryptography', 'REST APIs'],
     },
   ];
 
