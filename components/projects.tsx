@@ -147,6 +147,18 @@ export function Projects() {
       color: '#f97316',
       year: '2025',
     },
+    {
+      id: 5,
+      title: 'ReturnX AI',
+      description:
+        'IgniTrix hackathon project — an always-on AI tax & job assistant for India\'s gig workforce. Multi-agent pipeline (SmsParser → TaxAdvisor → Insights) via Groq/Llama 3.3 parses payment SMS for income & TDS estimates; Smart Job Picker compares live delivery offers for best ₹/hour. Privacy-first, runs in the browser with localStorage.',
+      tags: ['Python', 'Groq', 'Multi-Agent', 'Vercel'],
+      category: 'ai',
+      link: 'https://return-x1.vercel.app',
+      github: 'https://github.com/Adarsh-RD/hackathon-ignitrix',
+      color: '#a855f7',
+      year: '2026',
+    },
   ];
 
   const categories = [
