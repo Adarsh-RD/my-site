@@ -341,6 +341,26 @@
     100% { background-position: 60px 60px; }
   }
 
+  @keyframes marqueeScrollRight {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .projects-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marqueeScrollRight 45s linear infinite;
+    will-change: transform;
+  }
+
+  .projects-marquee:hover .projects-marquee-track {
+    animation-play-state: paused;
+  }
+
   /* === GRID BG === */
   .grid-bg {
     background-image: 
