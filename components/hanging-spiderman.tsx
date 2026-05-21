@@ -88,7 +88,7 @@ export function HangingSpiderman() {
 
   return (
     <div
-      className="absolute pointer-events-none"
+      className="hidden md:block absolute pointer-events-none"
       style={{ top: '0px', left: '32px', zIndex: 51 }}
     >
       <div

@@ -50,35 +50,50 @@ export function FloatingObjects() {
     const fgCtx = fgCanvas.getContext('2d');
     if (!bgCtx || !fgCtx) return;
 
-    const DOT_COUNT = 220;
-    const LEG_RADIUS = 200;
-    const LEG_COUNT = 6;
     const TRAIL_FADE = 0.015;
+
+    const getMobileSettings = () => {
+      const mobile = window.innerWidth < 768;
+      return {
+        mobile,
+        dotCount: mobile ? 60 : 220,
+        legRadius: mobile ? 120 : 200,
+        legCount: mobile ? 4 : 6,
+        glowMult: mobile ? 1.2 : 4,
+        maxRadius: mobile ? 0.9 : 1.8,
+        minRadius: mobile ? 0.35 : 0.8,
+        maxOpacity: mobile ? 0.35 : 0.8,
+      };
+    };
+
+    let settings = getMobileSettings();
 
     const resize = () => {
       bgCanvas.width = fgCanvas.width = window.innerWidth;
       bgCanvas.height = fgCanvas.height = window.innerHeight;
+      settings = getMobileSettings();
       distributeDots();
     };
 
     const distributeDots = () => {
-      const cols = Math.ceil(Math.sqrt(DOT_COUNT * (bgCanvas.width / bgCanvas.height)));
-      const rows = Math.ceil(DOT_COUNT / cols);
+      const { dotCount, maxRadius, minRadius, maxOpacity } = settings;
+      const cols = Math.ceil(Math.sqrt(dotCount * (bgCanvas.width / bgCanvas.height)));
+      const rows = Math.ceil(dotCount / cols);
       const cellW = bgCanvas.width / cols;
       const cellH = bgCanvas.height / rows;
       const dots: Dot[] = [];
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
-          if (dots.length >= DOT_COUNT) break;
+          if (dots.length >= dotCount) break;
           dots.push({
             x: c * cellW + Math.random() * cellW,
             y: r * cellH + Math.random() * cellH,
-            vx: (Math.random() - 0.5) * 0.15,
-            vy: (Math.random() - 0.5) * 0.15,
-            radius: Math.random() * 1.8 + 0.8,
-            opacity: Math.random() * 0.5 + 0.3,
+            vx: (Math.random() - 0.5) * 0.12,
+            vy: (Math.random() - 0.5) * 0.12,
+            radius: Math.random() * maxRadius + minRadius,
+            opacity: Math.random() * maxOpacity * 0.5 + maxOpacity * 0.35,
             twinkle: Math.random() * Math.PI * 2,
-            twinkleSpeed: Math.random() * 0.025 + 0.008,
+            twinkleSpeed: Math.random() * 0.02 + 0.006,
           });
         }
       }
@@ -265,9 +280,10 @@ export function FloatingObjects() {
         }
 
         const tw = dot.opacity * (0.6 + Math.sin(dot.twinkle) * 0.4);
+        const glow = settings.glowMult;
         bgCtx.beginPath();
-        bgCtx.arc(dot.x, dot.y, dot.radius * 4, 0, Math.PI * 2);
-        bgCtx.fillStyle = `rgba(255, 255, 255, ${tw * 0.05})`;
+        bgCtx.arc(dot.x, dot.y, dot.radius * glow, 0, Math.PI * 2);
+        bgCtx.fillStyle = `rgba(255, 255, 255, ${tw * (settings.mobile ? 0.02 : 0.05)})`;
         bgCtx.fill();
         bgCtx.beginPath();
         bgCtx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
@@ -301,14 +317,14 @@ export function FloatingObjects() {
 
           const nearDots = dots
             .map((dot, i) => ({ i, d: Math.hypot(dot.x - mx, dot.y - my) }))
-            .filter(o => o.d < LEG_RADIUS && o.d > 15)
+            .filter(o => o.d < settings.legRadius && o.d > 15)
             .sort((a, b) => a.d - b.d)
-            .slice(0, LEG_COUNT);
+            .slice(0, settings.legCount);
 
           // Legs connect from body (which pumps) to dots (which stay)
           nearDots.forEach(({ i, d }, legIndex) => {
             const dot = dots[i];
-            const alpha = (1 - d / LEG_RADIUS);
+            const alpha = (1 - d / settings.legRadius);
             const walkPhase = timeRef.current * 3 + legIndex * Math.PI / 3;
             const side = legIndex % 2 === 0 ? 1 : -1;
             drawLeg(bodyX, bodyY, dot.x, dot.y, alpha, pump > 0.1 ? 0 : walkPhase, side);
@@ -353,8 +369,9 @@ export function FloatingObjects() {
         td.alpha -= TRAIL_FADE;
         if (td.alpha <= 0) { trail.splice(i, 1); continue; }
         fgCtx.beginPath();
-        fgCtx.arc(td.x, td.y, td.size * 3, 0, Math.PI * 2);
-        fgCtx.fillStyle = `rgba(255, 255, 255, ${td.alpha * 0.05})`;
+        const trailGlow = settings.mobile ? 1.2 : 3;
+        fgCtx.arc(td.x, td.y, td.size * trailGlow, 0, Math.PI * 2);
+        fgCtx.fillStyle = `rgba(255, 255, 255, ${td.alpha * (settings.mobile ? 0.02 : 0.05)})`;
         fgCtx.fill();
         fgCtx.beginPath();
         fgCtx.arc(td.x, td.y, td.size, 0, Math.PI * 2);
@@ -362,8 +379,8 @@ export function FloatingObjects() {
         fgCtx.fill();
       }
 
-      // ---- Spidy intro message (near cursor, first ~5 seconds) ----
-      if (mouseMovedRef.current && spidyIntroRef.current < 350) {
+      // ---- Spidy intro message (desktop only) ----
+      if (!settings.mobile && mouseMovedRef.current && spidyIntroRef.current < 350) {
         spidyIntroRef.current++;
         const introAlpha = spidyIntroRef.current < 280
           ? Math.min(1, spidyIntroRef.current / 30)

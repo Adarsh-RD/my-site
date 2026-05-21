@@ -370,6 +370,16 @@
     animation: gridMove 20s linear infinite;
   }
 
+  @media (max-width: 767px) {
+    .grid-bg {
+      background-image: 
+        linear-gradient(rgba(232, 72, 85, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 72, 85, 0.02) 1px, transparent 1px);
+      background-size: 28px 28px;
+      animation: none;
+    }
+  }
+
   /* === MORPH BLOB === */
   .morph-blob {
     animation: morphBlob 12s ease-in-out infinite;

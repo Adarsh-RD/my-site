@@ -47,20 +47,20 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen relative overflow-hidden flex items-center justify-center pt-32 pb-16"
+      className="min-h-screen relative overflow-hidden flex items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-12 md:pb-16"
       ref={containerRef}
     >
       <div className="absolute inset-0 z-0">
         <motion.div
           style={{ y: yParallax }}
-          className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-[#e84855]/10 morph-blob blur-3xl"
+          className="absolute -top-20 -right-20 md:-top-32 md:-right-32 w-[220px] h-[220px] md:w-[500px] md:h-[500px] bg-[#e84855]/8 md:bg-[#e84855]/10 morph-blob blur-3xl"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
-          className="absolute -bottom-32 -left-32 w-[400px] h-[400px] bg-[#c41e3a]/8 morph-blob blur-3xl"
+          className="absolute -bottom-20 -left-20 md:-bottom-32 md:-left-32 w-[180px] h-[180px] md:w-[400px] md:h-[400px] bg-[#c41e3a]/6 md:bg-[#c41e3a]/8 morph-blob blur-3xl"
           aria-hidden
         />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e84855]/5 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[600px] md:h-[600px] bg-[#e84855]/4 md:bg-[#e84855]/5 rounded-full blur-[80px] md:blur-[120px]" />
       </div>
 
       <motion.div
@@ -68,10 +68,10 @@ export function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center justify-center text-center"
+        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center text-center"
       >
-        <motion.div variants={itemVariants} className="mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-medium text-[#9a95a8] tracking-widest uppercase">
+        <motion.div variants={itemVariants} className="mb-6 md:mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full glass text-[10px] md:text-xs font-medium text-[#9a95a8] tracking-wider md:tracking-widest uppercase max-w-[90vw] text-center">
             <Sparkles size={14} className="text-[#e84855]" />
             B.E. in Computer Science & Artificial Intelligence
           </div>
@@ -79,7 +79,7 @@ export function Hero() {
 
         <motion.div
           variants={itemVariants}
-          className="mb-10 relative group"
+          className="mb-8 md:mb-10 relative group"
           whileHover={{ scale: 1.05 }}
           transition={{ type: 'spring', stiffness: 300, damping: 25 }}
         >
@@ -98,7 +98,7 @@ export function Hero() {
             <div className="w-full h-full rounded-full border border-[#e84855]/20" />
           </div>
 
-          <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-[#e84855]/30">
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-[#e84855]/30">
             <Image
               src={myImage}
               alt="Adarsh R D"
@@ -111,13 +111,13 @@ export function Hero() {
         </motion.div>
 
         <motion.div variants={itemVariants} className="mb-4">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter px-2">
             <span className="text-gradient-primary">{nameText || '\u00A0'}</span>
           </h1>
         </motion.div>
 
         <motion.div variants={itemVariants} className="mb-10">
-          <p className="text-lg md:text-xl text-[#9a95a8] font-light tracking-wide max-w-xl">
+          <p className="text-base sm:text-lg md:text-xl text-[#9a95a8] font-light tracking-wide max-w-xl px-2 leading-relaxed">
             Building <span className="text-white font-medium">full-stack applications</span> &
             <span className="text-white font-medium"> agentic AI systems</span> at KLE Tech, Hubli
           </p>
@@ -135,7 +135,7 @@ export function Hero() {
           ))}
         </motion.div>
 
-        <motion.div variants={itemVariants} className="relative z-20 flex justify-center gap-3 mb-16">
+        <motion.div variants={itemVariants} className="relative z-20 flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 md:mb-16 px-2">
           {[
             { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub', external: true },
             { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn', external: true },
