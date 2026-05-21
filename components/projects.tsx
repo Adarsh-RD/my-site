@@ -20,7 +20,7 @@ interface Project {
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article
-      className="group relative shrink-0 w-[var(--project-card-w)] min-h-[26rem] flex flex-col glass rounded-2xl p-6 transition-all duration-500 hover:glass-hover premium-shadow"
+      className="group relative shrink-0 w-[16.5rem] max-w-[16.5rem] min-h-[24rem] flex flex-col glass rounded-2xl p-5 transition-all duration-500 hover:glass-hover premium-shadow"
       style={{ borderColor: `${project.color}18` }}
     >
       <div
@@ -34,14 +34,14 @@ function ProjectCard({ project }: { project: Project }) {
             className="w-2.5 h-2.5 rounded-full shrink-0"
             style={{ backgroundColor: project.color, boxShadow: `0 0 12px ${project.color}80` }}
           />
-          <h3 className="text-base font-semibold text-white leading-snug group-hover:text-gradient-primary transition-all duration-300">
+          <h3 className="text-sm font-semibold text-white leading-snug group-hover:text-gradient-primary transition-all duration-300 break-words">
             {project.title}
           </h3>
         </div>
         <span className="text-[10px] font-mono text-[#9a95a8]/50 shrink-0 tabular-nums">{project.year}</span>
       </div>
 
-      <p className="text-[#9a95a8] text-sm leading-relaxed flex-1 mb-5">
+      <p className="text-[#9a95a8] text-xs leading-relaxed flex-1 mb-4 break-words">
         {project.description}
       </p>
 
@@ -218,19 +218,19 @@ export function Projects() {
           )}
         </p>
 
-        {/* Marquee — 3 cards visible */}
+        {/* Marquee — fixed narrow cards, 3 fit in viewport (280px × 3 + gaps) */}
         <motion.div
           key={selectedCategory}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="projects-marquee relative overflow-hidden cursor-default rounded-r-2xl [--project-card-w:min(18rem,calc(100%-2rem))] sm:[--project-card-w:calc((100%-1.5rem)/2)] lg:[--project-card-w:calc((100%-3rem)/3)]"
+          className="projects-marquee relative w-full max-w-[calc(16.5rem*3+2.5rem)] overflow-hidden cursor-default"
           style={{
-            maskImage: 'linear-gradient(to right, black 88%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, black 88%, transparent 100%)',
+            maskImage: 'linear-gradient(to right, black 92%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to right, black 92%, transparent 100%)',
           }}
         >
-          <div className="projects-marquee-track gap-6 py-1">
+          <div className="projects-marquee-track gap-5 py-1">
             {marqueeProjects.map((project, index) => (
               <ProjectCard key={`${project.id}-${index}`} project={project} />
             ))}
