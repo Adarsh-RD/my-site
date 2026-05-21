@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowUp, Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail, Heart, Instagram } from 'lucide-react';
 
 export function Footer() {
   const scrollToTop = () => {
@@ -23,6 +23,7 @@ export function Footer() {
     { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:adarshdodmania@gmail.com', label: 'Email' },
+    { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram' },
   ];
 
   return (

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Github, Linkedin, Mail, ArrowDown, Sparkles, Phone } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowDown, Sparkles, Phone, Instagram } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
 import Image from 'next/image';
 import myImage from '@/images/my_image.jpg';
@@ -139,6 +139,7 @@ export function Hero() {
             { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn' },
             { icon: Mail, href: 'mailto:adarshdodmania@gmail.com', label: 'Email' },
             { icon: Phone, href: 'tel:+916361612811', label: 'Phone' },
+            { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram' },
           ].map((social) => (
             <motion.a
               key={social.label}

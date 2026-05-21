@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
 
 export function Contact() {
@@ -28,12 +28,14 @@ export function Contact() {
   const contactInfo = [
     { icon: Mail, label: 'Email', value: 'adarshdodmania@gmail.com', link: 'mailto:adarshdodmania@gmail.com' },
     { icon: Phone, label: 'Phone', value: '+91-6361612811', link: 'tel:+916361612811' },
+    { icon: Instagram, label: 'Instagram', value: '@_adxrshh.rd', link: 'https://www.instagram.com/_adxrshh.rd/' },
     { icon: MapPin, label: 'Location', value: 'Hubli, Karnataka, India', link: '#' },
   ];
 
   const socials = [
     { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram' },
   ];
 
   const inputClasses = (field: string) =>
@@ -123,10 +125,18 @@ export function Contact() {
             className="lg:col-span-2 space-y-6"
           >
             {contactInfo.map((info, index) => (
-              <motion.a key={index} href={info.link}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }} whileHover={{ x: 4 }}
-                className="flex items-center gap-4 p-5 rounded-xl glass hover:glass-hover transition-all duration-500 group">
+              <motion.a
+                key={index}
+                href={info.link}
+                target={info.link.startsWith('http') ? '_blank' : undefined}
+                rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ x: 4 }}
+                className="flex items-center gap-4 p-5 rounded-xl glass hover:glass-hover transition-all duration-500 group"
+              >
                 <div className="p-2.5 rounded-lg bg-[#e84855]/10 text-[#e84855] group-hover:bg-[#e84855]/20 transition-colors">
                   <info.icon size={18} />
                 </div>
