@@ -20,7 +20,7 @@ interface Project {
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article
-      className="group relative shrink-0 w-[min(100%,26rem)] sm:w-[28rem] flex flex-col glass rounded-2xl p-7 transition-all duration-500 hover:glass-hover premium-shadow"
+      className="group relative shrink-0 w-[var(--project-card-w)] min-h-[26rem] flex flex-col glass rounded-2xl p-6 transition-all duration-500 hover:glass-hover premium-shadow"
       style={{ borderColor: `${project.color}18` }}
     >
       <div
@@ -206,16 +206,28 @@ export function Projects() {
           ))}
         </motion.div>
 
-        {/* Marquee — aligned with filters, ~2.5 cards visible */}
+        <p className="text-sm text-[#9a95a8] mb-4 tracking-wide">
+          <span className="text-white font-semibold tabular-nums">{filteredProjects.length}</span>
+          {' '}
+          {filteredProjects.length === 1 ? 'project' : 'projects'}
+          {selectedCategory !== 'all' && (
+            <span className="text-[#9a95a8]/60">
+              {' '}
+              · filtered from {projects.length} total
+            </span>
+          )}
+        </p>
+
+        {/* Marquee — 3 cards visible */}
         <motion.div
           key={selectedCategory}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="projects-marquee relative overflow-hidden cursor-default rounded-r-2xl"
+          className="projects-marquee relative overflow-hidden cursor-default rounded-r-2xl [--project-card-w:min(18rem,calc(100%-2rem))] sm:[--project-card-w:calc((100%-1.5rem)/2)] lg:[--project-card-w:calc((100%-3rem)/3)]"
           style={{
-            maskImage: 'linear-gradient(to right, black 72%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, black 72%, transparent 100%)',
+            maskImage: 'linear-gradient(to right, black 88%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to right, black 88%, transparent 100%)',
           }}
         >
           <div className="projects-marquee-track gap-6 py-1">
