@@ -15,7 +15,8 @@ export function CustomCursor() {
 
     // Also hide on all interactive elements
     const style = document.createElement('style');
-    style.textContent = '*, *::before, *::after { cursor: none !important; }';
+    style.textContent =
+      '*, *::before, *::after { cursor: none !important; } a, button, [role="button"], input, textarea, select, label { cursor: pointer !important; }';
     document.head.appendChild(style);
 
     return () => {

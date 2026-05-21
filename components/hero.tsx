@@ -4,12 +4,15 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowDown, Sparkles, Phone, Instagram } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
+import { PhoneContactModal } from '@/components/phone-contact-modal';
+import { openMailClient, MAILTO_LINK } from '@/lib/contact';
 import Image from 'next/image';
 import myImage from '@/images/my_image.jpg';
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
+  const [phoneOpen, setPhoneOpen] = useState(false);
   const nameText = useTextScramble('Adarsh R D', inView, 30);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -123,8 +126,7 @@ export function Hero() {
         <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-8 mb-12">
           {[
             { value: '8.45', label: 'CGPA' },
-            { value: '3+', label: 'Projects' },
-            { value: 'SIH \'25', label: 'Selected' },
+            { value: '5+', label: 'Projects' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-gradient-primary">{stat.value}</div>
@@ -133,27 +135,52 @@ export function Hero() {
           ))}
         </motion.div>
 
-        <motion.div variants={itemVariants} className="flex justify-center gap-3 mb-16">
+        <motion.div variants={itemVariants} className="relative z-20 flex justify-center gap-3 mb-16">
           {[
-            { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub' },
-            { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn' },
-            { icon: Mail, href: 'mailto:adarshdodmania@gmail.com', label: 'Email' },
-            { icon: Phone, href: 'tel:+916361612811', label: 'Phone' },
-            { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram' },
+            { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub', external: true },
+            { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn', external: true },
+            { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram', external: true },
           ].map((social) => (
             <motion.a
               key={social.label}
               href={social.href}
-              target={social.href.startsWith('http') ? '_blank' : undefined}
-              rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ y: -4 }}
               whileTap={{ scale: 0.95 }}
-              className="p-3 rounded-xl glass hover:glass-hover transition-all duration-300 text-[#9a95a8] hover:text-[#e84855] magnetic-element"
+              className="relative z-20 p-3 rounded-xl glass hover:glass-hover transition-all duration-300 text-[#9a95a8] hover:text-[#e84855] cursor-pointer"
             >
               <social.icon size={20} />
             </motion.a>
           ))}
+
+          <motion.a
+            href={MAILTO_LINK}
+            onClick={(e) => {
+              e.preventDefault();
+              openMailClient();
+            }}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative z-20 p-3 rounded-xl glass hover:glass-hover transition-all duration-300 text-[#9a95a8] hover:text-[#e84855] cursor-pointer"
+            aria-label="Email Adarsh"
+          >
+            <Mail size={20} />
+          </motion.a>
+
+          <motion.button
+            type="button"
+            onClick={() => setPhoneOpen(true)}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative z-20 p-3 rounded-xl glass hover:glass-hover transition-all duration-300 text-[#9a95a8] hover:text-[#e84855] cursor-pointer"
+            aria-label="Show phone number"
+          >
+            <Phone size={20} />
+          </motion.button>
         </motion.div>
+
+        <PhoneContactModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
 
         <motion.div variants={itemVariants} className="flex flex-col items-center gap-2">
           <span className="text-[10px] uppercase tracking-[0.3em] text-[#9a95a8]/50">Scroll</span>

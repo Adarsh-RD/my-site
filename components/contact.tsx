@@ -4,11 +4,19 @@ import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
+import { PhoneContactModal } from '@/components/phone-contact-modal';
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_DISPLAY,
+  MAILTO_LINK,
+  openMailClient,
+} from '@/lib/contact';
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [phoneOpen, setPhoneOpen] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const heading = useTextScramble("Let's Connect", isInView, 30);
@@ -26,10 +34,34 @@ export function Contact() {
   };
 
   const contactInfo = [
-    { icon: Mail, label: 'Email', value: 'adarshdodmania@gmail.com', link: 'mailto:adarshdodmania@gmail.com' },
-    { icon: Phone, label: 'Phone', value: '+91-6361612811', link: 'tel:+916361612811' },
-    { icon: Instagram, label: 'Instagram', value: '@_adxrshh.rd', link: 'https://www.instagram.com/_adxrshh.rd/' },
-    { icon: MapPin, label: 'Location', value: 'Hubli, Karnataka, India', link: '#' },
+    {
+      icon: Mail,
+      label: 'Email',
+      value: CONTACT_EMAIL,
+      action: 'mail' as const,
+      link: MAILTO_LINK,
+    },
+    {
+      icon: Phone,
+      label: 'Phone',
+      value: CONTACT_PHONE_DISPLAY,
+      action: 'phone' as const,
+      link: '#',
+    },
+    {
+      icon: Instagram,
+      label: 'Instagram',
+      value: '@_adxrshh.rd',
+      action: 'link' as const,
+      link: 'https://www.instagram.com/_adxrshh.rd/',
+    },
+    {
+      icon: MapPin,
+      label: 'Location',
+      value: 'Hubli, Karnataka, India',
+      action: 'link' as const,
+      link: '#',
+    },
   ];
 
   const socials = [
@@ -124,28 +156,81 @@ export function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-2 space-y-6"
           >
-            {contactInfo.map((info, index) => (
-              <motion.a
-                key={index}
-                href={info.link}
-                target={info.link.startsWith('http') ? '_blank' : undefined}
-                rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ x: 4 }}
-                className="flex items-center gap-4 p-5 rounded-xl glass hover:glass-hover transition-all duration-500 group"
-              >
-                <div className="p-2.5 rounded-lg bg-[#e84855]/10 text-[#e84855] group-hover:bg-[#e84855]/20 transition-colors">
-                  <info.icon size={18} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[#9a95a8] text-[10px] uppercase tracking-wider mb-0.5">{info.label}</p>
-                  <p className="text-white text-sm font-medium truncate">{info.value}</p>
-                </div>
-              </motion.a>
-            ))}
+            {contactInfo.map((info, index) => {
+              const className =
+                'flex items-center gap-4 p-5 rounded-xl glass hover:glass-hover transition-all duration-500 group w-full text-left cursor-pointer';
+
+              const inner = (
+                <>
+                  <div className="p-2.5 rounded-lg bg-[#e84855]/10 text-[#e84855] group-hover:bg-[#e84855]/20 transition-colors">
+                    <info.icon size={18} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[#9a95a8] text-[10px] uppercase tracking-wider mb-0.5">{info.label}</p>
+                    <p className="text-white text-sm font-medium truncate">{info.value}</p>
+                  </div>
+                </>
+              );
+
+              if (info.action === 'phone') {
+                return (
+                  <motion.button
+                    key={info.label}
+                    type="button"
+                    onClick={() => setPhoneOpen(true)}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ x: 4 }}
+                    className={className}
+                  >
+                    {inner}
+                  </motion.button>
+                );
+              }
+
+              if (info.action === 'mail') {
+                return (
+                  <motion.a
+                    key={info.label}
+                    href={info.link}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openMailClient();
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ x: 4 }}
+                    className={className}
+                  >
+                    {inner}
+                  </motion.a>
+                );
+              }
+
+              return (
+                <motion.a
+                  key={info.label}
+                  href={info.link}
+                  target={info.link.startsWith('http') ? '_blank' : undefined}
+                  rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ x: 4 }}
+                  className={className}
+                  onClick={info.link === '#' ? (e) => e.preventDefault() : undefined}
+                >
+                  {inner}
+                </motion.a>
+              );
+            })}
+
+            <PhoneContactModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
 
             <div className="pt-8 border-t border-white/5">
               <p className="text-[10px] uppercase tracking-[0.3em] text-[#9a95a8] mb-4">Connect</p>

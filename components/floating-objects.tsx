@@ -438,7 +438,7 @@ export function FloatingObjects() {
   return (
     <>
       <canvas ref={bgCanvasRef} className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }} />
-      <canvas ref={fgCanvasRef} className="fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }} />
+      <canvas ref={fgCanvasRef} className="fixed inset-0 pointer-events-none" style={{ zIndex: 30 }} />
     </>
   );
 }
