@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowUp, Github, Linkedin, Mail, Heart, Instagram } from 'lucide-react';
+import { SiteLogo } from '@/components/site-logo';
 
 export function Footer() {
   const scrollToTop = () => {
@@ -36,11 +37,8 @@ export function Footer() {
             viewport={{ once: true }}
             className="max-w-xs"
           >
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#e84855] to-[#c41e3a] flex items-center justify-center">
-                <span className="text-white font-bold text-xs">A</span>
-              </div>
-              <span className="font-bold text-lg text-gradient-primary">darsh</span>
+            <div className="mb-4">
+              <SiteLogo />
             </div>
             <p className="text-[#9a95a8] text-sm leading-relaxed">
               B.E. CS & AI student at KLE Tech, Hubli. Building full-stack apps and agentic AI systems.

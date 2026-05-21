@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import { SiteLogo } from '@/components/site-logo';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,19 +54,7 @@ export function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link href="#home" className="flex items-center space-x-2 group magnetic-element relative overflow-visible">
-            <motion.div
-              whileHover={{ rotate: 180 }}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
-              className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#e84855] to-[#c41e3a] flex items-center justify-center relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20" />
-              <span className="text-white font-bold text-sm relative z-10">A</span>
-            </motion.div>
-            <span className="font-bold text-lg tracking-tight">
-              <span className="text-gradient-primary">darsh</span>
-            </span>
-          </Link>
+          <SiteLogo />
 
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
