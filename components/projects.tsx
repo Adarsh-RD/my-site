@@ -20,7 +20,7 @@ interface Project {
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article
-      className="group relative shrink-0 w-[min(100vw-3rem,22rem)] sm:w-[24rem] flex flex-col glass rounded-2xl p-6 transition-all duration-500 hover:glass-hover premium-shadow"
+      className="group relative shrink-0 w-[min(100%,26rem)] sm:w-[28rem] flex flex-col glass rounded-2xl p-7 transition-all duration-500 hover:glass-hover premium-shadow"
       style={{ borderColor: `${project.color}18` }}
     >
       <div
@@ -34,14 +34,14 @@ function ProjectCard({ project }: { project: Project }) {
             className="w-2.5 h-2.5 rounded-full shrink-0"
             style={{ backgroundColor: project.color, boxShadow: `0 0 12px ${project.color}80` }}
           />
-          <h3 className="text-base font-semibold text-white leading-snug group-hover:text-gradient-primary transition-all duration-300 truncate">
+          <h3 className="text-base font-semibold text-white leading-snug group-hover:text-gradient-primary transition-all duration-300">
             {project.title}
           </h3>
         </div>
         <span className="text-[10px] font-mono text-[#9a95a8]/50 shrink-0 tabular-nums">{project.year}</span>
       </div>
 
-      <p className="text-[#9a95a8] text-sm leading-relaxed flex-1 line-clamp-4 mb-5">
+      <p className="text-[#9a95a8] text-sm leading-relaxed flex-1 mb-5">
         {project.description}
       </p>
 
@@ -187,7 +187,7 @@ export function Projects() {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-wrap gap-2 mb-10"
+          className="flex flex-wrap gap-2 mb-8"
         >
           {categories.map((cat) => (
             <motion.button
@@ -205,32 +205,30 @@ export function Projects() {
             </motion.button>
           ))}
         </motion.div>
+
+        {/* Marquee — aligned with filters, ~2.5 cards visible */}
+        <motion.div
+          key={selectedCategory}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="projects-marquee relative overflow-hidden cursor-default rounded-r-2xl"
+          style={{
+            maskImage: 'linear-gradient(to right, black 72%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to right, black 72%, transparent 100%)',
+          }}
+        >
+          <div className="projects-marquee-track gap-6 py-1">
+            {marqueeProjects.map((project, index) => (
+              <ProjectCard key={`${project.id}-${index}`} project={project} />
+            ))}
+          </div>
+        </motion.div>
+
+        <p className="text-[#9a95a8]/40 text-xs mt-5 tracking-wide">
+          Hover to pause · scrolls automatically
+        </p>
       </div>
-
-      {/* Full-bleed marquee */}
-      <motion.div
-        key={selectedCategory}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        className="projects-marquee relative w-full cursor-default"
-        style={{
-          maskImage:
-            'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
-          WebkitMaskImage:
-            'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
-        }}
-      >
-        <div className="projects-marquee-track gap-5 py-2 pl-4 sm:pl-6">
-          {marqueeProjects.map((project, index) => (
-            <ProjectCard key={`${project.id}-${index}`} project={project} />
-          ))}
-        </div>
-      </motion.div>
-
-      <p className="text-center text-[#9a95a8]/40 text-xs mt-6 tracking-wide">
-        Hover to pause · scrolls automatically
-      </p>
     </section>
   );
 }
