@@ -23,7 +23,7 @@ export function Footer() {
   const socialLinks = [
     { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:adarshdodmania@gmail.com', label: 'Email' },
+    { icon: Mail, href: 'mailto:adarshdodamania@gmail.com', label: 'Email' },
     { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram' },
   ];
 
