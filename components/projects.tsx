@@ -12,8 +12,8 @@ interface Project {
   description: string;
   tags: string[];
   category: string;
-  link: string;
   github: string;
+  live?: string;
   color: string;
   year: string;
 }
@@ -21,8 +21,11 @@ interface Project {
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article
-      className="group relative shrink-0 w-[16.5rem] max-w-[16.5rem] min-h-[20rem] sm:min-h-[22rem] flex flex-col card-box transition-all duration-500 hover:glass-hover"
-      style={{ borderColor: `${project.color}18` }}
+      className="group relative shrink-0 w-[16.5rem] max-w-[16.5rem] min-h-[20rem] sm:min-h-[22rem] flex flex-col rounded-xl p-4 sm:p-5 transition-all duration-500 bg-[#0a0810] border shadow-[0_8px_28px_rgba(0,0,0,0.5)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.55)]"
+      style={{
+        borderColor: `${project.color}30`,
+        boxShadow: `0 8px 28px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)`,
+      }}
     >
       <div
         className="absolute top-0 left-0 right-0 h-px opacity-60"
@@ -50,14 +53,14 @@ function ProjectCard({ project }: { project: Project }) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/[0.04] text-[#7a7589] border border-white/[0.05]"
+            className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#15121c] text-[#9a95a8] border border-white/[0.08]"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      <div className="flex items-center justify-between pt-4 border-t border-white/5">
+      <div className="flex items-center justify-between pt-4 border-t border-white/[0.08]">
         <span className="text-[10px] uppercase tracking-[0.15em] text-[#7a7589]/60">
           {project.category === 'fullstack' ? 'Full Stack' : project.category === 'ai' ? 'AI / ML' : 'Backend'}
         </span>
@@ -66,28 +69,34 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-lg bg-white/5 hover:bg-[#e84855]/15 text-[#9a95a8] hover:text-white transition-all"
+            className="p-2 rounded-lg bg-[#15121c] border border-white/12 text-white hover:border-[#d63d4a]/50 hover:bg-[#d63d4a]/15 transition-all"
             title="GitHub"
             onClick={(e) => e.stopPropagation()}
           >
-            <Github size={14} />
+            <Github size={15} strokeWidth={2} />
           </a>
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-lg bg-white/5 hover:bg-[#e84855]/15 text-[#9a95a8] hover:text-[#e84855] transition-all"
-            title="View project"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <ArrowUpRight size={14} />
-          </a>
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg border text-white transition-all"
+              style={{
+                backgroundColor: `${project.color}18`,
+                borderColor: `${project.color}45`,
+              }}
+              title="Live demo"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ArrowUpRight size={15} strokeWidth={2} />
+            </a>
+          )}
         </div>
       </div>
 
       <div
-        className="absolute bottom-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ backgroundColor: `${project.color}20` }}
+        className="absolute bottom-0 right-0 w-28 h-28 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
+        style={{ backgroundColor: `${project.color}25` }}
       />
     </article>
   );
@@ -107,8 +116,8 @@ export function Projects() {
         'Full-stack college club management platform with role-based access (student, club admin, coordinator), OTP auth via Brevo API, JWT sessions, Firebase FCM push notifications, event registration with capacity limits, and admin approval workflows.',
       tags: ['React', 'Node.js', 'PostgreSQL', 'Firebase FCM'],
       category: 'fullstack',
-      link: 'https://github.com/Adarsh-RD/clubhub',
       github: 'https://github.com/Adarsh-RD/clubhub',
+      live: 'https://kle-clubhub.vercel.app/',
       color: '#e84855',
       year: '2025–26',
     },
@@ -119,7 +128,6 @@ export function Projects() {
         'Secure server-controlled online quiz backend built with Go (Gin) featuring timed sessions, anti-cheating mechanisms, and role-based access control.',
       tags: ['Go', 'Gin', 'REST APIs', 'RBAC'],
       category: 'backend',
-      link: 'https://github.com/Adarsh-RD/online-quiz',
       github: 'https://github.com/Adarsh-RD/online-quiz',
       color: '#38bdf8',
       year: '2025',
@@ -131,8 +139,8 @@ export function Projects() {
         'Infosys mini-project (KLE Tech × Infosys SoW): privacy-preserving engine to link Aadhaar, ABHA, DigiLocker, and mobile identities without storing raw IDs. HMAC-SHA256 blinded indexing, Pedersen-style ZK proofs, consent APIs, and tamper-evident audit logs.',
       tags: ['Node.js', 'MongoDB', 'ZKP', 'REST APIs'],
       category: 'backend',
-      link: 'https://github.com/Adarsh-RD/infosys-mini-project',
       github: 'https://github.com/Adarsh-RD/infosys-mini-project',
+      live: 'https://infosys-mini-project.onrender.com',
       color: '#c41e3a',
       year: '2025–26',
     },
@@ -143,7 +151,6 @@ export function Projects() {
         'Real-time spam SMS and email detection system with classification pipelines for filtering malicious or unwanted messages before they reach the user.',
       tags: ['Java', 'ML', 'NLP', 'Email/SMS'],
       category: 'ai',
-      link: 'https://github.com/Adarsh-RD/spam-detector',
       github: 'https://github.com/Adarsh-RD/spam-detector',
       color: '#f97316',
       year: '2025',
@@ -155,8 +162,8 @@ export function Projects() {
         'IgniTrix hackathon project — an always-on AI tax & job assistant for India\'s gig workforce. Multi-agent pipeline (SmsParser → TaxAdvisor → Insights) via Groq/Llama 3.3 parses payment SMS for income & TDS estimates; Smart Job Picker compares live delivery offers for best ₹/hour. Privacy-first, runs in the browser with localStorage.',
       tags: ['Python', 'Groq', 'Multi-Agent', 'Vercel'],
       category: 'ai',
-      link: 'https://return-x1.vercel.app',
       github: 'https://github.com/Adarsh-RD/hackathon-ignitrix',
+      live: 'https://return-x1.vercel.app/',
       color: '#a855f7',
       year: '2026',
     },

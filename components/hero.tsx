@@ -103,7 +103,7 @@ export function Hero() {
               src={profileImage}
               alt="Adarsh R D"
               fill
-              className="object-cover"
+              className="object-cover object-center scale-[1.12]"
               sizes="128px"
               priority
             />
