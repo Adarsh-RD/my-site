@@ -20,7 +20,8 @@ export function About() {
 
   const stats = [
     { value: '8.45', label: 'CGPA at KLE Tech' },
-    { value: '96.4%', label: 'Class XII Score' },
+    { value: '94.4%', label: 'Class XII (KSEAB)' },
+    { value: '95.68%', label: 'Class X (KSEAB)' },
     { value: '5+', label: 'Deployed Projects' },
   ];
 

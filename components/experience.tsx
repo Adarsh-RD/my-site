@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
@@ -87,13 +87,13 @@ export function Experience() {
       coursework: 'DSA, OS, DBMS, ML, Generative AI, Computer Networks, Software Engineering',
     },
     {
-      degree: 'Class XII (KSEAB) — 96.4%',
+      degree: 'Class XII (KSEAB) — 94.4%',
       school: 'SMT S S Pattepur PU College, Ramdurg',
       year: '2021 — 2023',
       details: 'State Board Examination',
     },
     {
-      degree: 'Class X (KSEAB) — 96.4%',
+      degree: 'Class X (KSEAB) — 95.68%',
       school: 'GOVT Adarsha Vidyalaya RMSA, Katkol',
       year: '2016 — 2021',
       details: 'State Board Examination',
