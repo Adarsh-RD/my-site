@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Github, Linkedin, Mail, ArrowDown, Sparkles, Phone, Instagram } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowDown, Sparkles, Instagram } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
-import { PhoneContactModal } from '@/components/phone-contact-modal';
 import { openMailClient, MAILTO_LINK } from '@/lib/contact';
 import Image from 'next/image';
 import profileImage from '@/images/Firefly.jpg';
@@ -12,7 +11,6 @@ import profileImage from '@/images/Firefly.jpg';
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  const [phoneOpen, setPhoneOpen] = useState(false);
   const nameText = useTextScramble('Adarsh R D', inView, 30);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -167,20 +165,7 @@ export function Hero() {
           >
             <Mail size={18} />
           </motion.a>
-
-          <motion.button
-            type="button"
-            onClick={() => setPhoneOpen(true)}
-            whileHover={{ y: -4 }}
-            whileTap={{ scale: 0.95 }}
-            className="relative z-20 p-2.5 rounded-lg glass hover:glass-hover transition-all duration-300 text-[#7a7589] hover:text-[#d63d4a] cursor-pointer"
-            aria-label="Show phone number"
-          >
-            <Phone size={18} />
-          </motion.button>
         </motion.div>
-
-        <PhoneContactModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
 
         <motion.div variants={itemVariants} className="flex flex-col items-center gap-2">
           <span className="text-[9px] uppercase tracking-[0.28em] text-[#7a7589]/50">Scroll</span>

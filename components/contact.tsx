@@ -2,13 +2,11 @@
 
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
 import { SectionHeader } from '@/components/section-header';
-import { PhoneContactModal } from '@/components/phone-contact-modal';
 import {
   CONTACT_EMAIL,
-  CONTACT_PHONE_DISPLAY,
   MAILTO_LINK,
   openMailClient,
   submitContactForm,
@@ -21,7 +19,6 @@ export function Contact() {
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
   const [formError, setFormError] = useState('');
   const [focusedField, setFocusedField] = useState<string | null>(null);
-  const [phoneOpen, setPhoneOpen] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const heading = useTextScramble("Let's Connect", isInView, 30);
@@ -58,13 +55,6 @@ export function Contact() {
       value: CONTACT_EMAIL,
       action: 'mail' as const,
       link: MAILTO_LINK,
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: CONTACT_PHONE_DISPLAY,
-      action: 'phone' as const,
-      link: '#',
     },
     {
       icon: Instagram,
@@ -204,24 +194,6 @@ export function Contact() {
                 </>
               );
 
-              if (info.action === 'phone') {
-                return (
-                  <motion.button
-                    key={info.label}
-                    type="button"
-                    onClick={() => setPhoneOpen(true)}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ x: 4 }}
-                    className={className}
-                  >
-                    {inner}
-                  </motion.button>
-                );
-              }
-
               if (info.action === 'mail') {
                 return (
                   <motion.a
@@ -261,8 +233,6 @@ export function Contact() {
                 </motion.a>
               );
             })}
-
-            <PhoneContactModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
 
             <div className="pt-5 border-t border-white/[0.04]">
               <p className="text-[9px] uppercase tracking-[0.28em] text-[#7a7589] mb-3">Connect</p>
