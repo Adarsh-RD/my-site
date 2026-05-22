@@ -20,29 +20,15 @@ export type ContactFormPayload = {
 };
 
 export async function submitContactForm(payload: ContactFormPayload): Promise<void> {
-  const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(CONTACT_EMAIL)}`, {
+  const response = await fetch('/api/contact', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({
-      name: payload.name,
-      email: payload.email,
-      subject: payload.subject,
-      message: payload.message,
-      _subject: `Portfolio: ${payload.subject}`,
-      _template: 'table',
-      _captcha: 'false',
-    }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    throw new Error(`Contact form failed (${response.status})`);
-  }
+  const data = (await response.json().catch(() => ({}))) as { error?: string };
 
-  const data = (await response.json()) as { success?: string };
-  if (!data.success) {
-    throw new Error('Contact form rejected');
+  if (!response.ok) {
+    throw new Error(data.error || `Contact form failed (${response.status})`);
   }
 }

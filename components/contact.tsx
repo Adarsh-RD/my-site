@@ -40,9 +40,14 @@ export function Contact() {
       setFormStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setFormStatus('idle'), 5000);
-    } catch {
+    } catch (err) {
       setFormStatus('error');
-      setFormError(`Could not send right now. Email me at ${CONTACT_EMAIL}`);
+      const message = err instanceof Error ? err.message : 'Could not send right now.';
+      setFormError(
+        message.includes('RESEND_API_KEY')
+          ? 'Email service is not set up on the server yet. Use the button below to email directly.'
+          : `${message} Or email me at ${CONTACT_EMAIL}.`,
+      );
     }
   };
 
