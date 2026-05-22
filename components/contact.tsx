@@ -11,11 +11,15 @@ import {
   CONTACT_PHONE_DISPLAY,
   MAILTO_LINK,
   openMailClient,
+  submitContactForm,
 } from '@/lib/contact';
+
+type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
+  const [formError, setFormError] = useState('');
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [phoneOpen, setPhoneOpen] = useState(false);
   const ref = useRef(null);
@@ -26,12 +30,20 @@ export function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setTimeout(() => setSubmitted(false), 3000);
+    setFormStatus('sending');
+    setFormError('');
+
+    try {
+      await submitContactForm(formData);
+      setFormStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setFormStatus('idle'), 5000);
+    } catch {
+      setFormStatus('error');
+      setFormError(`Could not send right now. Email me at ${CONTACT_EMAIL}`);
+    }
   };
 
   const contactInfo = [
@@ -93,7 +105,7 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-3"
+            className="lg:col-span-3 relative z-20"
           >
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
@@ -123,15 +135,42 @@ export function Contact() {
                   required rows={4} className={`${inputClasses('message')} resize-none`}
                   placeholder="Tell me about your project..." />
               </div>
-              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit"
-                className="group w-full py-3 bg-gradient-to-r from-[#d63d4a] to-[#a8323f] text-white rounded-lg font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 glow-red hover:glow-red-intense transition-all duration-500 magnetic-element">
-                <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                Send Message
+              <motion.button
+                whileHover={formStatus !== 'sending' ? { scale: 1.02 } : undefined}
+                whileTap={formStatus !== 'sending' ? { scale: 0.98 } : undefined}
+                type="submit"
+                disabled={formStatus === 'sending'}
+                className="group w-full py-3 bg-gradient-to-r from-[#d63d4a] to-[#a8323f] text-white rounded-lg font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 glow-red hover:glow-red-intense transition-all duration-500 magnetic-element disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                <Send
+                  size={16}
+                  className={`transition-transform ${formStatus === 'sending' ? 'animate-pulse' : 'group-hover:translate-x-1 group-hover:-translate-y-1'}`}
+                />
+                {formStatus === 'sending' ? 'Sending…' : 'Send Message'}
               </motion.button>
-              {submitted && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                  className="text-center py-3 rounded-xl glass text-sm text-emerald-400">
-                  ✓ Message sent successfully!
+              {formStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-center py-3 rounded-xl glass text-sm text-emerald-400"
+                >
+                  ✓ Message sent — check your inbox for my reply.
+                </motion.div>
+              )}
+              {formStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-center py-3 rounded-xl glass text-sm text-[#d63d4a]"
+                >
+                  {formError}{' '}
+                  <button
+                    type="button"
+                    onClick={openMailClient}
+                    className="underline hover:text-white transition-colors"
+                  >
+                    Open email
+                  </button>
                 </motion.div>
               )}
             </form>
