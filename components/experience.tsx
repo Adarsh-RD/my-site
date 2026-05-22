@@ -15,6 +15,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
+import { SectionHeader } from '@/components/section-header';
 
 type AchievementCategory = 'hackathon' | 'research' | 'certification' | 'club';
 
@@ -148,30 +149,16 @@ export function Experience() {
   ];
 
   return (
-    <section id="experience" className="py-32 px-4 sm:px-6 lg:px-8 relative" ref={ref}>
+    <section id="experience" className="section-pad relative" ref={ref}>
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <div className="flex items-center gap-4 mb-4">
-            <div className="section-line" />
-            <span className="text-xs uppercase tracking-[0.3em] text-[#e84855] font-medium">04</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="text-gradient-primary">{heading || '\u00A0'}</span>
-          </h2>
-        </motion.div>
+        <SectionHeader number="04" title={heading || 'Experience'} />
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-24">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 mb-14">
           {/* Work */}
           <div>
-            <div className="flex items-center gap-2 mb-10">
-              <Briefcase className="w-4 h-4 text-[#e84855]" />
-              <h3 className="text-sm uppercase tracking-[0.2em] text-[#9a95a8] font-medium">Work</h3>
+            <div className="flex items-center gap-2 mb-6">
+              <Briefcase className="w-3.5 h-3.5 text-[#d63d4a]" />
+              <h3 className="text-[10px] uppercase tracking-[0.2em] text-[#7a7589] font-medium">Work</h3>
             </div>
 
             <div className="relative">
@@ -189,21 +176,21 @@ export function Experience() {
                   <motion.div
                     whileInView={{ scale: [0, 1.4, 1] }}
                     viewport={{ once: true }}
-                    className="absolute left-0 top-2 w-[15px] h-[15px] rounded-full border-2 border-[#e84855] bg-[#060408] z-10"
+                    className="absolute left-0 top-2 w-[13px] h-[13px] rounded-full border-2 border-[#d63d4a] bg-[#030204] z-10"
                   >
                     <div className="absolute inset-1 rounded-full bg-[#e84855] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </motion.div>
 
-                  <div className="glass p-6 rounded-xl hover:glass-hover transition-all duration-500 group-hover:translate-x-2">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                      <h4 className="text-lg font-semibold text-white">{exp.title}</h4>
-                      <span className="text-xs font-mono text-[#e84855] tracking-wider">{exp.period}</span>
+                  <div className="card-box hover:glass-hover transition-all duration-500 group-hover:translate-x-1">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                      <h4 className="text-sm sm:text-base font-semibold text-white/95">{exp.title}</h4>
+                      <span className="text-[10px] font-mono text-[#d63d4a] tracking-wider">{exp.period}</span>
                     </div>
-                    <p className="text-[#9a95a8] text-sm mb-4">{exp.company} — {exp.location}</p>
+                    <p className="text-[#7a7589] text-xs mb-3">{exp.company} — {exp.location}</p>
                     
-                    <ul className="space-y-2 mb-4">
+                    <ul className="space-y-1.5 mb-3">
                       {exp.bullets.map((bullet, i) => (
-                        <li key={i} className="text-[#9a95a8]/80 text-sm leading-relaxed flex gap-2">
+                        <li key={i} className="text-[#7a7589] text-xs leading-relaxed flex gap-2">
                           <span className="text-[#e84855] mt-1 shrink-0">▸</span>
                           {bullet}
                         </li>
@@ -225,12 +212,12 @@ export function Experience() {
 
           {/* Education */}
           <div>
-            <div className="flex items-center gap-2 mb-10">
-              <GraduationCap className="w-4 h-4 text-purple-400" />
-              <h3 className="text-sm uppercase tracking-[0.2em] text-[#9a95a8] font-medium">Education</h3>
+            <div className="flex items-center gap-2 mb-6">
+              <GraduationCap className="w-3.5 h-3.5 text-purple-400/90" />
+              <h3 className="text-[10px] uppercase tracking-[0.2em] text-[#7a7589] font-medium">Education</h3>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {education.map((edu, index) => (
                 <motion.div
                   key={index}
@@ -239,13 +226,13 @@ export function Experience() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
                   whileHover={{ y: -2 }}
-                  className="glass p-6 rounded-xl hover:glass-hover transition-all duration-500"
+                  className="card-box hover:glass-hover transition-all duration-500"
                 >
-                  <h4 className="text-sm font-semibold text-white mb-2 leading-snug">{edu.degree}</h4>
-                  <p className="text-[#9a95a8] text-xs mb-1">{edu.school}</p>
-                  <p className="text-[#9a95a8]/70 text-xs">{edu.details}</p>
+                  <h4 className="text-xs sm:text-sm font-semibold text-white/95 mb-1.5 leading-snug">{edu.degree}</h4>
+                  <p className="text-[#7a7589] text-[11px] mb-0.5">{edu.school}</p>
+                  <p className="text-[#7a7589]/80 text-[11px]">{edu.details}</p>
                   {edu.coursework && (
-                    <p className="text-[#9a95a8]/50 text-xs mt-2 italic">Coursework: {edu.coursework}</p>
+                    <p className="text-[#7a7589]/60 text-[10px] mt-1.5 italic leading-snug">Coursework: {edu.coursework}</p>
                   )}
                   <span className="inline-block mt-3 text-[10px] font-mono text-purple-400 tracking-wider">{edu.year}</span>
                 </motion.div>
@@ -256,14 +243,14 @@ export function Experience() {
 
         {/* Achievements — full-width bento grid */}
         <div>
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
             <div className="flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-[#e84855]" />
-              <h3 className="text-sm uppercase tracking-[0.2em] text-[#9a95a8] font-medium">
+              <Trophy className="w-3.5 h-3.5 text-[#d63d4a]" />
+              <h3 className="text-[10px] uppercase tracking-[0.2em] text-[#7a7589] font-medium">
                 Achievements & Certifications
               </h3>
             </div>
-            <p className="text-[#9a95a8]/60 text-xs max-w-md leading-relaxed">
+            <p className="text-[#7a7589]/70 text-[11px] max-w-md leading-relaxed">
               Hackathons, research, industry certs, and hands-on engineering outside the classroom.
             </p>
           </div>
@@ -283,9 +270,9 @@ export function Experience() {
                   transition={{ delay: index * 0.06, duration: 0.5 }}
                   onMouseEnter={() => setHoveredAchievement(index)}
                   onMouseLeave={() => setHoveredAchievement(null)}
-                  className={`group relative overflow-hidden rounded-2xl transition-all duration-500 ${
+                  className={`group relative overflow-hidden rounded-xl transition-all duration-500 ${
                     isFeatured ? 'sm:row-span-2' : ''
-                  } ${isHovered ? 'glass-hover premium-shadow' : 'glass'}`}
+                  } ${isHovered ? 'glass-hover' : 'glass'}`}
                 >
                   <div
                     className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${
@@ -296,7 +283,7 @@ export function Experience() {
                   />
 
                   <div
-                    className={`relative h-full flex flex-col p-5 ${isFeatured ? 'sm:p-7 justify-between min-h-[220px]' : 'min-h-[140px]'}`}
+                    className={`relative h-full flex flex-col p-4 ${isFeatured ? 'sm:p-5 justify-between min-h-[200px]' : 'min-h-[128px]'}`}
                   >
                     <div className="flex items-start justify-between gap-3 mb-4">
                       <motion.div
@@ -326,14 +313,14 @@ export function Experience() {
                       </span>
 
                       <h4
-                        className={`font-semibold text-white leading-snug mb-1.5 group-hover:text-gradient-primary transition-all duration-300 ${
-                          isFeatured ? 'text-lg sm:text-xl' : 'text-sm'
+                        className={`font-semibold text-white/95 leading-snug mb-1 group-hover:text-gradient-primary transition-all duration-300 ${
+                          isFeatured ? 'text-base sm:text-lg' : 'text-xs sm:text-sm'
                         }`}
                       >
                         {item.title}
                       </h4>
 
-                      <p className={`text-[#9a95a8] leading-relaxed ${isFeatured ? 'text-sm' : 'text-xs'}`}>
+                      <p className={`text-[#7a7589] leading-relaxed ${isFeatured ? 'text-xs sm:text-sm' : 'text-[11px]'}`}>
                         {item.desc}
                       </p>
                     </div>

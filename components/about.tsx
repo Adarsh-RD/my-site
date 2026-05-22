@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Code2, Zap, Brain, Layers } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
+import { SectionHeader } from '@/components/section-header';
 
 export function About() {
   const ref = useRef(null);
@@ -11,58 +12,48 @@ export function About() {
   const heading = useTextScramble('About Me', isInView, 35);
 
   const features = [
-    { icon: Code2, title: 'Full Stack Dev', desc: 'React, Node.js, PostgreSQL' },
-    { icon: Brain, title: 'AI / ML', desc: 'Agentic systems, NLP, Ollama' },
-    { icon: Zap, title: 'Fast Learner', desc: 'Hackathon winner & builder' },
-    { icon: Layers, title: 'DevOps', desc: 'Docker, AWS, CI/CD' },
+    { icon: Brain, title: 'Curious by nature', desc: 'Always picking up new ideas and tools' },
+    { icon: Code2, title: 'Ship-first mindset', desc: 'Ideas matter when they work in the real world' },
+    { icon: Zap, title: 'Team player', desc: 'Hackathons, clubs, and builds with friends' },
+    { icon: Layers, title: 'Beyond code', desc: 'Drones at AeroKLE, movies, campus life' },
   ];
 
   const stats = [
     { value: '8.45', label: 'CGPA at KLE Tech' },
     { value: '96.4%', label: 'Class XII Score' },
-    { value: '3+', label: 'Deployed Projects' },
+    { value: '5+', label: 'Deployed Projects' },
   ];
 
   return (
-    <section id="about" className="py-32 px-4 sm:px-6 lg:px-8 relative" ref={ref}>
+    <section id="about" className="section-pad relative" ref={ref}>
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <div className="flex items-center gap-4 mb-4">
-            <div className="section-line" />
-            <span className="text-xs uppercase tracking-[0.3em] text-[#e84855] font-medium">01</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="text-gradient-primary">{heading || '\u00A0'}</span>
-          </h2>
-        </motion.div>
+        <SectionHeader
+          number="01"
+          title={heading || 'About Me'}
+          subtitle="Who I am — not just what I've built"
+        />
 
-        <div className="grid lg:grid-cols-5 gap-16 items-start">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-3 space-y-6"
+            className="lg:col-span-3 space-y-4"
           >
-            <p className="text-[#9a95a8] text-lg leading-relaxed">
-              I&apos;m Adarsh R D, a B.E. Computer Science & AI student at KLE Technological University, Hubli. I&apos;m passionate about building real-world software — from full-stack web apps to agentic AI systems that reason and act autonomously.
+            <p className="body-text">
+              I&apos;m Adarsh R D — a B.E. Computer Science & AI student at KLE Technological University, Hubli. I&apos;m the kind of person who gets hooked on a problem and won&apos;t stop until something real ships: a web app classmates can use, an AI tool that actually saves time, or a weekend hackathon idea that turns into a live project.
             </p>
 
-            <p className="text-[#9a95a8] text-lg leading-relaxed">
-              At Infosys (Project Intern, Aug 2025 — Jan 2026), I led development of the Cross-System Identity Resolution Engine — a privacy-preserving platform that links Aadhaar, ABHA, DigiLocker, and mobile identities using blinded indexing, zero-knowledge proofs, consent APIs, and tamper-evident audit logs, as part of the KLE Tech × Infosys industry SoW.
+            <p className="body-text">
+              I love the full build cycle — sketching UI, wiring backends, breaking things, fixing them, and learning something new every sprint. I pick up fast, work well in teams, and I&apos;m happiest when code leaves my laptop and helps someone. The tech stack changes; the habit of building doesn&apos;t.
             </p>
 
-            <p className="text-[#9a95a8] text-lg leading-relaxed">
-              I&apos;ve been selected for Smart India Hackathon 2025, was runner-up at IgniTrix 2026 (state-level), and have an IEEE research paper on AI-based video restoration using U-Net. When I&apos;m not coding, I&apos;m building drones at the AeroKLE Club.
+            <p className="body-text">
+              Competitions and campus life keep me grounded — Smart India Hackathon 2025, runner-up at IgniTrix 2026, research on AI video restoration, and drone builds with AeroKLE when I need a break from the editor. If you&apos;re looking for someone curious, reliable, and genuinely excited to build — I&apos;d love to connect.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-8">
+            <div className="grid grid-cols-2 gap-3 pt-4">
               {features.map((feature, index) => (
                 <motion.div
                   key={feature.title}
@@ -71,11 +62,11 @@ export function About() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + index * 0.1 }}
                   whileHover={{ y: -4 }}
-                  className="group glass p-5 rounded-xl hover:glass-hover transition-all duration-500 shimmer"
+                  className="group card-box hover:glass-hover transition-all duration-500"
                 >
-                  <feature.icon className="w-5 h-5 text-[#e84855] mb-3 group-hover:scale-110 transition-transform" />
-                  <p className="text-white font-medium text-sm mb-1">{feature.title}</p>
-                  <p className="text-[#9a95a8] text-xs">{feature.desc}</p>
+                  <feature.icon className="w-4 h-4 text-[#d63d4a] mb-2 group-hover:scale-110 transition-transform" />
+                  <p className="text-white/95 font-medium text-xs sm:text-sm mb-0.5">{feature.title}</p>
+                  <p className="text-[#7a7589] text-[11px] leading-snug">{feature.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -86,7 +77,7 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="lg:col-span-2 space-y-4"
+            className="lg:col-span-2 space-y-3"
           >
             {stats.map((stat, index) => (
               <motion.div
@@ -95,14 +86,13 @@ export function About() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 + index * 0.15 }}
-                whileHover={{ scale: 1.03 }}
-                className="glass p-8 rounded-2xl hover:glass-hover transition-all duration-500 breathing-glow relative overflow-hidden"
+                whileHover={{ scale: 1.02 }}
+                className="card-box hover:glass-hover transition-all duration-500 relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-[#e84855]/5 rounded-full blur-2xl" />
-                <h3 className="text-5xl md:text-6xl font-bold text-gradient-primary mb-2 relative z-10">
+                <h3 className="text-2xl md:text-3xl font-bold text-gradient-primary mb-1 relative z-10">
                   {stat.value}
                 </h3>
-                <p className="text-[#9a95a8] text-sm tracking-wide relative z-10">{stat.label}</p>
+                <p className="text-[#7a7589] text-xs tracking-wide relative z-10">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>

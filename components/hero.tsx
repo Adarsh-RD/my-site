@@ -47,7 +47,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen relative overflow-hidden flex items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-12 md:pb-16"
+      className="min-h-[88vh] sm:min-h-screen relative overflow-hidden flex items-center justify-center pt-20 sm:pt-24 md:pt-28 pb-10 md:pb-14"
       ref={containerRef}
     >
       <div className="absolute inset-0 z-0">
@@ -71,8 +71,8 @@ export function Hero() {
         className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center text-center"
       >
         <motion.div variants={itemVariants} className="mb-6 md:mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full glass text-[10px] md:text-xs font-medium text-[#9a95a8] tracking-wider md:tracking-widest uppercase max-w-[90vw] text-center">
-            <Sparkles size={14} className="text-[#e84855]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[9px] sm:text-[10px] font-medium text-[#7a7589] tracking-wider uppercase max-w-[90vw] text-center">
+            <Sparkles size={12} className="text-[#d63d4a]" />
             B.E. in Computer Science & Artificial Intelligence
           </div>
         </motion.div>
@@ -111,31 +111,31 @@ export function Hero() {
         </motion.div>
 
         <motion.div variants={itemVariants} className="mb-4">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter px-2">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight px-2">
             <span className="text-gradient-primary">{nameText || '\u00A0'}</span>
           </h1>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="mb-10">
-          <p className="text-base sm:text-lg md:text-xl text-[#9a95a8] font-light tracking-wide max-w-xl px-2 leading-relaxed">
+        <motion.div variants={itemVariants} className="mb-8">
+          <p className="text-sm sm:text-base md:text-lg text-[#7a7589] font-light tracking-wide max-w-lg px-2 leading-relaxed">
             Building <span className="text-white font-medium">full-stack applications</span> &
             <span className="text-white font-medium"> agentic AI systems</span> at KLE Tech, Hubli
           </p>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-8 mb-12">
+        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 mb-10">
           {[
             { value: '8.45', label: 'CGPA' },
             { value: '5+', label: 'Projects' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-gradient-primary">{stat.value}</div>
-              <div className="text-xs text-[#9a95a8] uppercase tracking-widest mt-1">{stat.label}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gradient-primary">{stat.value}</div>
+              <div className="text-[10px] text-[#7a7589] uppercase tracking-widest mt-0.5">{stat.label}</div>
             </div>
           ))}
         </motion.div>
 
-        <motion.div variants={itemVariants} className="relative z-20 flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 md:mb-16 px-2">
+        <motion.div variants={itemVariants} className="relative z-20 flex flex-wrap justify-center gap-2 mb-10 md:mb-12 px-2">
           {[
             { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub', external: true },
             { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn', external: true },
@@ -148,9 +148,9 @@ export function Hero() {
               rel="noopener noreferrer"
               whileHover={{ y: -4 }}
               whileTap={{ scale: 0.95 }}
-              className="relative z-20 p-3 rounded-xl glass hover:glass-hover transition-all duration-300 text-[#9a95a8] hover:text-[#e84855] cursor-pointer"
+              className="relative z-20 p-2.5 rounded-lg glass hover:glass-hover transition-all duration-300 text-[#7a7589] hover:text-[#d63d4a] cursor-pointer"
             >
-              <social.icon size={20} />
+              <social.icon size={18} />
             </motion.a>
           ))}
 
@@ -162,10 +162,10 @@ export function Hero() {
             }}
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.95 }}
-            className="relative z-20 p-3 rounded-xl glass hover:glass-hover transition-all duration-300 text-[#9a95a8] hover:text-[#e84855] cursor-pointer"
+            className="relative z-20 p-2.5 rounded-lg glass hover:glass-hover transition-all duration-300 text-[#7a7589] hover:text-[#d63d4a] cursor-pointer"
             aria-label="Email Adarsh"
           >
-            <Mail size={20} />
+            <Mail size={18} />
           </motion.a>
 
           <motion.button
@@ -173,19 +173,19 @@ export function Hero() {
             onClick={() => setPhoneOpen(true)}
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.95 }}
-            className="relative z-20 p-3 rounded-xl glass hover:glass-hover transition-all duration-300 text-[#9a95a8] hover:text-[#e84855] cursor-pointer"
+            className="relative z-20 p-2.5 rounded-lg glass hover:glass-hover transition-all duration-300 text-[#7a7589] hover:text-[#d63d4a] cursor-pointer"
             aria-label="Show phone number"
           >
-            <Phone size={20} />
+            <Phone size={18} />
           </motion.button>
         </motion.div>
 
         <PhoneContactModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
 
         <motion.div variants={itemVariants} className="flex flex-col items-center gap-2">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-[#9a95a8]/50">Scroll</span>
+          <span className="text-[9px] uppercase tracking-[0.28em] text-[#7a7589]/50">Scroll</span>
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}>
-            <ArrowDown size={16} className="text-[#e84855]/50" />
+            <ArrowDown size={14} className="text-[#d63d4a]/50" />
           </motion.div>
         </motion.div>
       </motion.div>

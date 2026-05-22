@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Code2, Layers, Wrench, Cpu } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
+import { SectionHeader } from '@/components/section-header';
 
 export function Skills() {
   const ref = useRef(null);
@@ -70,28 +71,15 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" className="py-32 px-4 sm:px-6 lg:px-8 relative aurora-bg" ref={ref}>
+    <section id="skills" className="section-pad relative aurora-bg" ref={ref}>
       <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <div className="flex items-center gap-4 mb-4">
-            <div className="section-line" />
-            <span className="text-xs uppercase tracking-[0.3em] text-[#e84855] font-medium">02</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="text-gradient-primary">{heading || '\u00A0'}</span>
-          </h2>
-          <p className="text-[#9a95a8] text-lg mt-4 max-w-xl">
-            From low-level C to agentic AI pipelines — here&apos;s what I work with
-          </p>
-        </motion.div>
+        <SectionHeader
+          number="02"
+          title={heading || 'Skills & Expertise'}
+          subtitle="From low-level C to agentic AI pipelines — here's what I work with"
+        />
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-5">
           {skillCategories.map((category, catIndex) => {
             const Icon = category.icon;
             const isCardHovered = hoveredCard === catIndex;
@@ -106,10 +94,10 @@ export function Skills() {
                 onMouseEnter={() => setHoveredCard(catIndex)}
                 onMouseLeave={() => setHoveredCard(null)}
                 data-hoverable
-                className={`glass p-8 rounded-2xl transition-all duration-500 group relative overflow-hidden ${
+                className={`card-box transition-all duration-500 group relative overflow-hidden ${
                   isCardHovered
-                    ? 'border border-[#e84855]/40 shadow-[0_0_25px_rgba(232,72,85,0.15),inset_0_0_25px_rgba(232,72,85,0.05)]'
-                    : 'border border-transparent'
+                    ? 'glass-hover border-[#d63d4a]/25'
+                    : ''
                 }`}
               >
                 {/* Removed tap indicator */}
@@ -122,19 +110,18 @@ export function Skills() {
                 />
 
                 {/* Header */}
-                <div className="flex items-center gap-3 mb-7">
-                  <div className={`p-2.5 rounded-xl transition-all duration-300 ${isCardHovered
-                      ? 'bg-[#e84855]/15 shadow-[0_0_15px_rgba(232,72,85,0.15)]'
-                      : 'bg-white/[0.04]'
+                <div className="flex items-center gap-2.5 mb-4">
+                  <div className={`p-2 rounded-lg transition-all duration-300 ${isCardHovered
+                      ? 'bg-[#d63d4a]/12'
+                      : 'bg-white/[0.03]'
                     }`}>
-                    <Icon size={20} className={`transition-colors duration-300 ${isCardHovered ? 'text-[#e84855]' : 'text-[#9a95a8]'
+                    <Icon size={16} className={`transition-colors duration-300 ${isCardHovered ? 'text-[#d63d4a]' : 'text-[#7a7589]'
                       }`} />
                   </div>
-                  <h3 className={`text-xl font-semibold tracking-tight transition-colors duration-300 ${isCardHovered ? 'text-gradient-primary' : 'text-white'}`}>{category.category}</h3>
+                  <h3 className={`text-sm sm:text-base font-semibold tracking-tight transition-colors duration-300 ${isCardHovered ? 'text-gradient-primary' : 'text-white/95'}`}>{category.category}</h3>
                 </div>
 
-                {/* Skill tags */}
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => {
                     const skillKey = `${catIndex}-${skill.name}`;
                     const isHovered = hoveredSkill === skillKey;
@@ -151,7 +138,7 @@ export function Skills() {
                         onMouseEnter={() => setHoveredSkill(skillKey)}
                         onMouseLeave={() => setHoveredSkill(null)}
                         role="button"
-                        className="relative rounded-full text-sm font-medium cursor-default transition-all duration-300 magnetic-element px-4 py-2"
+                        className="relative rounded-full text-xs font-medium cursor-default transition-all duration-300 px-3 py-1.5"
                         style={{
                           background: isHovered
                             ? 'linear-gradient(135deg, rgba(232,72,85,0.25), rgba(232,72,85,0.1))'
@@ -190,10 +177,10 @@ export function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-20 pt-16 border-t border-white/5"
+          className="mt-12 pt-10 border-t border-white/[0.04]"
         >
-          <h3 className="text-center text-sm uppercase tracking-[0.3em] text-[#9a95a8] mb-10">Databases & More</h3>
-          <div className="flex flex-wrap justify-center gap-3">
+          <h3 className="text-center text-[10px] uppercase tracking-[0.28em] text-[#7a7589] mb-6">Databases & More</h3>
+          <div className="flex flex-wrap justify-center gap-2">
             {['PostgreSQL', 'MongoDB', 'Firebase', 'Supabase', 'GraphQL', 'Apache Kafka', 'Scikit-learn', 'Ollama'].map((tech, index) => (
               <motion.div
                 key={tech}
@@ -203,7 +190,7 @@ export function Skills() {
                 transition={{ delay: index * 0.05 }}
                 whileHover={{ scale: 1.1, y: -4 }}
                 role="button"
-                className="px-5 py-2.5 rounded-full glass hover:glass-hover text-sm font-medium text-[#9a95a8] hover:text-white transition-all duration-300 magnetic-element"
+                className="px-3 py-1.5 rounded-full glass hover:glass-hover text-xs font-medium text-[#7a7589] hover:text-white transition-all duration-300"
               >
                 {tech}
               </motion.div>

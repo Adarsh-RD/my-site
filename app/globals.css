@@ -40,25 +40,25 @@
 }
 
 .dark {
-  --background: #060408;
-  --foreground: #f0eef5;
-  --card: #0d0b12;
-  --card-foreground: #f0eef5;
-  --popover: #0d0b12;
-  --popover-foreground: #f0eef5;
-  --primary: #e84855;
-  --primary-foreground: #060408;
-  --secondary: #c41e3a;
-  --secondary-foreground: #f0eef5;
-  --muted: #1a1520;
-  --muted-foreground: #9a95a8;
-  --accent: #e84855;
-  --accent-foreground: #060408;
-  --destructive: #ff5757;
-  --destructive-foreground: #060408;
-  --border: #1e1828;
-  --input: #0d0b12;
-  --ring: #e84855;
+  --background: #030204;
+  --foreground: #e6e4eb;
+  --card: #08060c;
+  --card-foreground: #e6e4eb;
+  --popover: #08060c;
+  --popover-foreground: #e6e4eb;
+  --primary: #d63d4a;
+  --primary-foreground: #030204;
+  --secondary: #a8323f;
+  --secondary-foreground: #e6e4eb;
+  --muted: #0e0b12;
+  --muted-foreground: #7a7589;
+  --accent: #d63d4a;
+  --accent-foreground: #030204;
+  --destructive: #e84855;
+  --destructive-foreground: #030204;
+  --border: #15111c;
+  --input: #08060c;
+  --ring: #d63d4a;
   --chart-1: #e84855;
   --chart-2: #ff5757;
   --chart-3: #c41e3a;
@@ -150,29 +150,31 @@
 
   /* === GLASSMORPHISM v2 === */
   .glass {
-    @apply backdrop-blur-2xl;
+    @apply backdrop-blur-xl;
     background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(232, 72, 85, 0.03) 50%,
-      rgba(255, 255, 255, 0.02) 100%
+      145deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(214, 61, 74, 0.025) 45%,
+      rgba(0, 0, 0, 0.15) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.045);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 4px 24px rgba(0, 0, 0, 0.35);
   }
 
   .glass-hover {
-    @apply backdrop-blur-2xl;
+    @apply backdrop-blur-xl;
     background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.06) 0%,
-      rgba(232, 72, 85, 0.06) 50%,
-      rgba(255, 255, 255, 0.03) 100%
+      145deg,
+      rgba(255, 255, 255, 0.045) 0%,
+      rgba(214, 61, 74, 0.05) 50%,
+      rgba(0, 0, 0, 0.12) 100%
     );
-    border: 1px solid rgba(232, 72, 85, 0.2);
-    box-shadow: 
-      inset 0 1px 0 rgba(255, 255, 255, 0.06),
-      0 0 40px rgba(232, 72, 85, 0.08);
+    border: 1px solid rgba(214, 61, 74, 0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 8px 32px rgba(0, 0, 0, 0.4);
   }
 
   /* === PREMIUM SHADOW SYSTEM === */
@@ -202,10 +204,48 @@
 
   /* === GRADIENT TEXT === */
   .text-gradient-primary {
-    background: linear-gradient(135deg, #e84855 0%, #ff6b6b 50%, #c41e3a 100%);
+    background: linear-gradient(135deg, #d63d4a 0%, #e86b74 42%, #a8323f 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .section-pad {
+    @apply py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-head {
+    @apply mb-10 md:mb-12;
+  }
+
+  .section-eyebrow {
+    @apply text-[10px] uppercase tracking-[0.28em] text-[#c94552]/90 font-medium;
+  }
+
+  .section-title {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-bold tracking-tight leading-[1.15];
+  }
+
+  .section-desc {
+    @apply text-[#7a7589] text-sm md:text-[15px] leading-relaxed max-w-md mt-3;
+  }
+
+  .body-text {
+    @apply text-[#7a7589] text-sm md:text-[15px] leading-relaxed;
+  }
+
+  .card-box {
+    @apply backdrop-blur-xl rounded-xl p-4 sm:p-5;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(214, 61, 74, 0.025) 45%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.045);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 4px 24px rgba(0, 0, 0, 0.35);
   }
 
   .text-gradient-muted {
@@ -364,8 +404,8 @@
   /* === GRID BG === */
   .grid-bg {
     background-image: 
-      linear-gradient(rgba(232, 72, 85, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(232, 72, 85, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(214, 61, 74, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(214, 61, 74, 0.02) 1px, transparent 1px);
     background-size: 60px 60px;
     animation: gridMove 20s linear infinite;
   }
@@ -373,8 +413,8 @@
   @media (max-width: 767px) {
     .grid-bg {
       background-image: 
-        linear-gradient(rgba(232, 72, 85, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232, 72, 85, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(214, 61, 74, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(214, 61, 74, 0.015) 1px, transparent 1px);
       background-size: 28px 28px;
       animation: none;
     }

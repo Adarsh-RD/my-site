@@ -28,9 +28,9 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative border-t border-white/5 py-16 px-4 sm:px-6 lg:px-8">
+    <footer className="relative border-t border-white/[0.04] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ export function Footer() {
             <div className="mb-4">
               <SiteLogo />
             </div>
-            <p className="text-[#9a95a8] text-sm leading-relaxed">
+            <p className="text-[#7a7589] text-xs leading-relaxed">
               B.E. CS & AI student at KLE Tech, Hubli. Building full-stack apps and agentic AI systems.
             </p>
           </motion.div>
@@ -51,10 +51,10 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            <h4 className="text-[10px] uppercase tracking-[0.3em] text-[#9a95a8] mb-4 font-medium">Navigation</h4>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+            <h4 className="text-[9px] uppercase tracking-[0.28em] text-[#7a7589] mb-3 font-medium">Navigation</h4>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-1.5">
               {footerLinks.map((link) => (
-                <a key={link.name} href={link.href} className="text-[#9a95a8] hover:text-white text-sm transition-colors link-hover-effect">
+                <a key={link.name} href={link.href} className="text-[#7a7589] hover:text-white text-xs transition-colors link-hover-effect">
                   {link.name}
                 </a>
               ))}
@@ -68,7 +68,7 @@ export function Footer() {
             transition={{ delay: 0.2 }}
           >
             <motion.button onClick={scrollToTop} whileHover={{ y: -4 }} whileTap={{ scale: 0.95 }}
-              className="p-3 rounded-xl glass hover:glass-hover transition-all duration-300 text-[#9a95a8] hover:text-[#e84855] magnetic-element"
+              className="p-2.5 rounded-lg glass hover:glass-hover transition-all duration-300 text-[#7a7589] hover:text-[#d63d4a] magnetic-element"
               title="Back to top">
               <ArrowUp size={18} />
             </motion.button>
@@ -78,8 +78,8 @@ export function Footer() {
         <div className="h-px bg-gradient-to-r from-transparent via-white/5 to-transparent mb-8" />
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-[#9a95a8]/60 text-xs flex items-center gap-1">
-            © {currentYear} Adarsh R D. Built with <Heart size={10} className="text-[#e84855]" /> using Next.js
+          <p className="text-[#7a7589]/60 text-[11px] flex items-center gap-1">
+            © {currentYear} Adarsh R D. Built with <Heart size={10} className="text-[#d63d4a]" /> using Next.js
           </p>
           <div className="flex gap-2">
             {socialLinks.map((social) => (
@@ -87,7 +87,7 @@ export function Footer() {
                 target={social.href.startsWith('http') ? '_blank' : undefined}
                 rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 whileHover={{ y: -2 }}
-                className="p-2 rounded-lg text-[#9a95a8]/40 hover:text-[#9a95a8] transition-colors" title={social.label}>
+                className="p-2 rounded-lg text-[#7a7589]/40 hover:text-[#7a7589] transition-colors" title={social.label}>
                 <social.icon size={16} />
               </motion.a>
             ))}

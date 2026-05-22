@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
+import { SectionHeader } from '@/components/section-header';
 import { PhoneContactModal } from '@/components/phone-contact-modal';
 import {
   CONTACT_EMAIL,
@@ -71,35 +72,22 @@ export function Contact() {
   ];
 
   const inputClasses = (field: string) =>
-    `w-full px-4 py-3.5 bg-transparent border rounded-xl text-white placeholder-[#9a95a8]/40 focus:outline-none transition-all duration-500 text-sm ${
+    `w-full px-3.5 py-2.5 bg-transparent border rounded-lg text-white/95 placeholder-[#7a7589]/50 focus:outline-none transition-all duration-500 text-sm ${
       focusedField === field
-        ? 'border-[#e84855]/50 shadow-[0_0_20px_rgba(232,72,85,0.1)]'
-        : 'border-white/8 hover:border-white/15'
+        ? 'border-[#d63d4a]/45 shadow-[0_0_16px_rgba(214,61,74,0.08)]'
+        : 'border-white/[0.06] hover:border-white/12'
     }`;
 
   return (
-    <section id="contact" className="py-32 px-4 sm:px-6 lg:px-8 relative" ref={ref}>
+    <section id="contact" className="section-pad relative" ref={ref}>
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <div className="flex items-center gap-4 mb-4">
-            <div className="section-line" />
-            <span className="text-xs uppercase tracking-[0.3em] text-[#e84855] font-medium">05</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="text-gradient-primary">{heading || '\u00A0'}</span>
-          </h2>
-          <p className="text-[#9a95a8] text-lg mt-4 max-w-xl">
-            Open to internships, collaborations, and cool projects. Let&apos;s build something.
-          </p>
-        </motion.div>
+        <SectionHeader
+          number="05"
+          title={heading || "Let's Connect"}
+          subtitle="Open to internships, collaborations, and cool projects. Let's build something."
+        />
 
-        <div className="grid lg:grid-cols-5 gap-16">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -107,36 +95,36 @@ export function Contact() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-3"
           >
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid sm:grid-cols-2 gap-5">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[#9a95a8] text-xs font-medium mb-2 uppercase tracking-wider">Name</label>
+                  <label className="block text-[#7a7589] text-[10px] font-medium mb-1.5 uppercase tracking-wider">Name</label>
                   <input type="text" name="name" value={formData.name} onChange={handleChange}
                     onFocus={() => setFocusedField('name')} onBlur={() => setFocusedField(null)}
                     required className={inputClasses('name')} placeholder="Your name" />
                 </div>
                 <div>
-                  <label className="block text-[#9a95a8] text-xs font-medium mb-2 uppercase tracking-wider">Email</label>
+                  <label className="block text-[#7a7589] text-[10px] font-medium mb-1.5 uppercase tracking-wider">Email</label>
                   <input type="email" name="email" value={formData.email} onChange={handleChange}
                     onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)}
                     required className={inputClasses('email')} placeholder="you@example.com" />
                 </div>
               </div>
               <div>
-                <label className="block text-[#9a95a8] text-xs font-medium mb-2 uppercase tracking-wider">Subject</label>
+                <label className="block text-[#7a7589] text-[10px] font-medium mb-1.5 uppercase tracking-wider">Subject</label>
                 <input type="text" name="subject" value={formData.subject} onChange={handleChange}
                   onFocus={() => setFocusedField('subject')} onBlur={() => setFocusedField(null)}
                   required className={inputClasses('subject')} placeholder="Project discussion" />
               </div>
               <div>
-                <label className="block text-[#9a95a8] text-xs font-medium mb-2 uppercase tracking-wider">Message</label>
+                <label className="block text-[#7a7589] text-[10px] font-medium mb-1.5 uppercase tracking-wider">Message</label>
                 <textarea name="message" value={formData.message} onChange={handleChange}
                   onFocus={() => setFocusedField('message')} onBlur={() => setFocusedField(null)}
-                  required rows={5} className={`${inputClasses('message')} resize-none`}
+                  required rows={4} className={`${inputClasses('message')} resize-none`}
                   placeholder="Tell me about your project..." />
               </div>
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit"
-                className="group w-full py-4 bg-gradient-to-r from-[#e84855] to-[#c41e3a] text-white rounded-xl font-medium text-sm tracking-wider uppercase flex items-center justify-center gap-2 glow-red hover:glow-red-intense transition-all duration-500 magnetic-element">
+                className="group w-full py-3 bg-gradient-to-r from-[#d63d4a] to-[#a8323f] text-white rounded-lg font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 glow-red hover:glow-red-intense transition-all duration-500 magnetic-element">
                 <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 Send Message
               </motion.button>
@@ -154,20 +142,20 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-2 space-y-6"
+            className="lg:col-span-2 space-y-3"
           >
             {contactInfo.map((info, index) => {
               const className =
-                'flex items-center gap-4 p-5 rounded-xl glass hover:glass-hover transition-all duration-500 group w-full text-left cursor-pointer';
+                'flex items-center gap-3 p-3.5 rounded-xl card-box hover:glass-hover transition-all duration-500 group w-full text-left cursor-pointer';
 
               const inner = (
                 <>
-                  <div className="p-2.5 rounded-lg bg-[#e84855]/10 text-[#e84855] group-hover:bg-[#e84855]/20 transition-colors">
-                    <info.icon size={18} />
+                  <div className="p-2 rounded-lg bg-[#d63d4a]/10 text-[#d63d4a] group-hover:bg-[#d63d4a]/18 transition-colors">
+                    <info.icon size={16} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[#9a95a8] text-[10px] uppercase tracking-wider mb-0.5">{info.label}</p>
-                    <p className="text-white text-sm font-medium truncate">{info.value}</p>
+                    <p className="text-[#7a7589] text-[9px] uppercase tracking-wider mb-0.5">{info.label}</p>
+                    <p className="text-white/95 text-xs font-medium truncate">{info.value}</p>
                   </div>
                 </>
               );
@@ -232,14 +220,14 @@ export function Contact() {
 
             <PhoneContactModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
 
-            <div className="pt-8 border-t border-white/5">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-[#9a95a8] mb-4">Connect</p>
-              <div className="flex gap-3">
+            <div className="pt-5 border-t border-white/[0.04]">
+              <p className="text-[9px] uppercase tracking-[0.28em] text-[#7a7589] mb-3">Connect</p>
+              <div className="flex gap-2">
                 {socials.map((social) => (
                   <motion.a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer"
-                    whileHover={{ y: -4 }} whileTap={{ scale: 0.95 }}
-                    className="p-3 rounded-xl glass hover:glass-hover text-[#9a95a8] hover:text-white transition-all duration-300 magnetic-element">
-                    <social.icon size={18} />
+                    whileHover={{ y: -3 }} whileTap={{ scale: 0.95 }}
+                    className="p-2.5 rounded-lg glass hover:glass-hover text-[#7a7589] hover:text-white transition-all duration-300 magnetic-element">
+                    <social.icon size={16} />
                   </motion.a>
                 ))}
               </div>
