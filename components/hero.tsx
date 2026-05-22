@@ -7,7 +7,7 @@ import { useTextScramble } from '@/hooks/use-text-scramble';
 import { PhoneContactModal } from '@/components/phone-contact-modal';
 import { openMailClient, MAILTO_LINK } from '@/lib/contact';
 import Image from 'next/image';
-import myImage from '@/images/my_image.jpg';
+import profileImage from '@/images/Firefly.jpg';
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -100,7 +100,7 @@ export function Hero() {
 
           <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-[#e84855]/30">
             <Image
-              src={myImage}
+              src={profileImage}
               alt="Adarsh R D"
               fill
               className="object-cover"
