@@ -291,8 +291,8 @@ export function FloatingObjects() {
         bgCtx.fill();
       }
 
-      // ---- Foreground: spider / pump / jet ----
-      if (mx > -999) {
+      // ---- Foreground: spider / pump / jet (desktop only) ----
+      if (!settings.mobile && mx > -999) {
         const pmx = prevMouseRef.current.x;
         const pmy = prevMouseRef.current.y;
         let angle = 0;
@@ -360,80 +360,79 @@ export function FloatingObjects() {
         }
 
         if (lastTrailX < -999) { lastTrailX = mx; lastTrailY = my; }
-      }
 
-      // Trail dots (always draw, fade naturally)
-      const trail = trailRef.current;
-      for (let i = trail.length - 1; i >= 0; i--) {
-        const td = trail[i];
-        td.alpha -= TRAIL_FADE;
-        if (td.alpha <= 0) { trail.splice(i, 1); continue; }
-        fgCtx.beginPath();
-        const trailGlow = settings.mobile ? 1.2 : 3;
-        fgCtx.arc(td.x, td.y, td.size * trailGlow, 0, Math.PI * 2);
-        fgCtx.fillStyle = `rgba(255, 255, 255, ${td.alpha * (settings.mobile ? 0.02 : 0.05)})`;
-        fgCtx.fill();
-        fgCtx.beginPath();
-        fgCtx.arc(td.x, td.y, td.size, 0, Math.PI * 2);
-        fgCtx.fillStyle = `rgba(255, 255, 255, ${td.alpha * 0.9})`;
-        fgCtx.fill();
-      }
-
-      // ---- Spidy intro message (desktop only) ----
-      if (!settings.mobile && mouseMovedRef.current && spidyIntroRef.current < 350) {
-        spidyIntroRef.current++;
-        const introAlpha = spidyIntroRef.current < 280
-          ? Math.min(1, spidyIntroRef.current / 30)
-          : Math.max(0, (350 - spidyIntroRef.current) / 70);
-
-        if (introAlpha > 0 && mx > -999) {
-          const bx = mx + 35;
-          const by = my - 30;
-
-          fgCtx.save();
-          fgCtx.globalAlpha = introAlpha * 0.95;
-
-          // Angular box
-          const bw = 155;
-          const bh = 38;
-          const cut = 8;
+        // Trail dots (desktop only, fade naturally)
+        const trail = trailRef.current;
+        for (let i = trail.length - 1; i >= 0; i--) {
+          const td = trail[i];
+          td.alpha -= TRAIL_FADE;
+          if (td.alpha <= 0) { trail.splice(i, 1); continue; }
           fgCtx.beginPath();
-          fgCtx.moveTo(bx, by);
-          fgCtx.lineTo(bx + bw - cut, by);
-          fgCtx.lineTo(bx + bw, by + cut);
-          fgCtx.lineTo(bx + bw, by + bh);
-          fgCtx.lineTo(bx + cut, by + bh);
-          fgCtx.lineTo(bx, by + bh - cut);
-          fgCtx.closePath();
-          fgCtx.fillStyle = 'rgba(10, 6, 16, 0.88)';
+          fgCtx.arc(td.x, td.y, td.size * 3, 0, Math.PI * 2);
+          fgCtx.fillStyle = `rgba(255, 255, 255, ${td.alpha * 0.05})`;
           fgCtx.fill();
-          fgCtx.strokeStyle = 'rgba(232, 72, 85, 0.5)';
-          fgCtx.lineWidth = 1;
-          fgCtx.stroke();
-
-          // Arrow from box to spider
           fgCtx.beginPath();
-          fgCtx.moveTo(bx, by + 15);
-          fgCtx.lineTo(bx - 8, by + 19);
-          fgCtx.lineTo(bx, by + 23);
-          fgCtx.fillStyle = 'rgba(232, 72, 85, 0.5)';
+          fgCtx.arc(td.x, td.y, td.size, 0, Math.PI * 2);
+          fgCtx.fillStyle = `rgba(255, 255, 255, ${td.alpha * 0.9})`;
           fgCtx.fill();
+        }
 
-          // Text line 1
-          fgCtx.font = '600 11px system-ui, sans-serif';
-          fgCtx.fillStyle = '#fff';
-          fgCtx.fillText("Hey! I'm ", bx + 10, by + 16);
-          fgCtx.fillStyle = '#e84855';
-          fgCtx.fillText('Spidy', bx + 65, by + 16);
-          fgCtx.fillStyle = '#fff';
-          fgCtx.fillText(' 🕷️', bx + 93, by + 16);
+        // ---- Spidy intro message ----
+        if (mouseMovedRef.current && spidyIntroRef.current < 350) {
+          spidyIntroRef.current++;
+          const introAlpha = spidyIntroRef.current < 280
+            ? Math.min(1, spidyIntroRef.current / 30)
+            : Math.max(0, (350 - spidyIntroRef.current) / 70);
 
-          // Text line 2
-          fgCtx.font = '400 9.5px system-ui, sans-serif';
-          fgCtx.fillStyle = 'rgba(154, 149, 168, 0.9)';
-          fgCtx.fillText('Your navigation assistant', bx + 10, by + 31);
+          if (introAlpha > 0 && mx > -999) {
+            const bx = mx + 35;
+            const by = my - 30;
 
-          fgCtx.restore();
+            fgCtx.save();
+            fgCtx.globalAlpha = introAlpha * 0.95;
+
+            // Angular box
+            const bw = 155;
+            const bh = 38;
+            const cut = 8;
+            fgCtx.beginPath();
+            fgCtx.moveTo(bx, by);
+            fgCtx.lineTo(bx + bw - cut, by);
+            fgCtx.lineTo(bx + bw, by + cut);
+            fgCtx.lineTo(bx + bw, by + bh);
+            fgCtx.lineTo(bx + cut, by + bh);
+            fgCtx.lineTo(bx, by + bh - cut);
+            fgCtx.closePath();
+            fgCtx.fillStyle = 'rgba(10, 6, 16, 0.88)';
+            fgCtx.fill();
+            fgCtx.strokeStyle = 'rgba(232, 72, 85, 0.5)';
+            fgCtx.lineWidth = 1;
+            fgCtx.stroke();
+
+            // Arrow from box to spider
+            fgCtx.beginPath();
+            fgCtx.moveTo(bx, by + 15);
+            fgCtx.lineTo(bx - 8, by + 19);
+            fgCtx.lineTo(bx, by + 23);
+            fgCtx.fillStyle = 'rgba(232, 72, 85, 0.5)';
+            fgCtx.fill();
+
+            // Text line 1
+            fgCtx.font = '600 11px system-ui, sans-serif';
+            fgCtx.fillStyle = '#fff';
+            fgCtx.fillText("Hey! I'm ", bx + 10, by + 16);
+            fgCtx.fillStyle = '#e84855';
+            fgCtx.fillText('Spidy', bx + 65, by + 16);
+            fgCtx.fillStyle = '#fff';
+            fgCtx.fillText(' 🕷️', bx + 93, by + 16);
+
+            // Text line 2
+            fgCtx.font = '400 9.5px system-ui, sans-serif';
+            fgCtx.fillStyle = 'rgba(154, 149, 168, 0.9)';
+            fgCtx.fillText('Your navigation assistant', bx + 10, by + 31);
+
+            fgCtx.restore();
+          }
         }
       }
 
