@@ -121,68 +121,96 @@ export function Hero() {
           </p>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-10 px-2">
-          {[
-            { value: '5+', label: 'Deployed Projects', icon: Rocket, color: '#e84855' },
-            { value: '1', label: 'IEEE Research Paper', icon: FileText, color: '#a855f7' },
-            { value: '3+', label: 'Industry Certs', icon: Award, color: '#38bdf8' },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              whileHover={{ y: -4, scale: 1.03 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              className="group relative flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 rounded-xl overflow-hidden"
-              style={{
-                background: 'rgba(10, 8, 16, 0.6)',
-                border: '1px solid rgba(255, 255, 255, 0.06)',
-                backdropFilter: 'blur(12px)',
-              }}
-            >
-              {/* Animated glow border on hover */}
-              <div
-                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: `linear-gradient(135deg, ${stat.color}15, transparent 60%)`,
-                  border: `1px solid ${stat.color}35`,
-                  borderRadius: 'inherit',
-                }}
-              />
-
-              {/* Icon */}
-              <div
-                className="relative z-10 flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg transition-all duration-300"
-                style={{
-                  background: `${stat.color}12`,
-                  border: `1px solid ${stat.color}20`,
-                }}
-              >
-                <stat.icon
-                  size={16}
-                  className="transition-transform duration-300 group-hover:scale-110"
-                  style={{ color: stat.color }}
-                />
-              </div>
-
-              {/* Text */}
-              <div className="relative z-10 text-left">
-                <div
-                  className="text-xl sm:text-2xl font-bold tracking-tight"
+        {/* Stats — compact pills on mobile, glass cards on sm+ */}
+        <motion.div variants={itemVariants} className="mb-10 px-2">
+          {/* Mobile: compact inline row */}
+          <div className="flex sm:hidden items-center justify-center gap-1">
+            {[
+              { value: '5+', label: 'Projects', color: '#e84855' },
+              { value: '1', label: 'IEEE Paper', color: '#a855f7' },
+              { value: '3+', label: 'Certs', color: '#38bdf8' },
+            ].map((stat, index) => (
+              <div key={stat.label} className="flex items-center gap-1">
+                {index > 0 && (
+                  <span className="text-[#7a7589]/30 mx-1.5">·</span>
+                )}
+                <span
+                  className="text-base font-bold"
                   style={{ color: stat.color }}
                 >
                   {stat.value}
-                </div>
-                <div className="text-[9px] sm:text-[10px] text-[#7a7589] uppercase tracking-widest leading-tight">
+                </span>
+                <span className="text-[10px] text-[#7a7589] uppercase tracking-wider">
                   {stat.label}
-                </div>
+                </span>
               </div>
+            ))}
+          </div>
 
-              {/* Corner glow */}
-              <div
-                className="absolute -bottom-2 -right-2 w-16 h-16 rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none"
-                style={{ backgroundColor: stat.color }}
-              />
-            </motion.div>
-          ))}
+          {/* Desktop: glass cards with icons */}
+          <div className="hidden sm:flex flex-wrap justify-center gap-4">
+            {[
+              { value: '5+', label: 'Deployed Projects', icon: Rocket, color: '#e84855' },
+              { value: '1', label: 'IEEE Research Paper', icon: FileText, color: '#a855f7' },
+              { value: '3+', label: 'Industry Certs', icon: Award, color: '#38bdf8' },
+            ].map((stat) => (
+              <motion.div
+                key={stat.label}
+                whileHover={{ y: -4, scale: 1.03 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="group relative flex items-center gap-3 px-5 py-3.5 rounded-xl overflow-hidden"
+                style={{
+                  background: 'rgba(10, 8, 16, 0.6)',
+                  border: '1px solid rgba(255, 255, 255, 0.06)',
+                  backdropFilter: 'blur(12px)',
+                }}
+              >
+                {/* Glow border on hover */}
+                <div
+                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(135deg, ${stat.color}15, transparent 60%)`,
+                    border: `1px solid ${stat.color}35`,
+                    borderRadius: 'inherit',
+                  }}
+                />
+
+                {/* Icon */}
+                <div
+                  className="relative z-10 flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300"
+                  style={{
+                    background: `${stat.color}12`,
+                    border: `1px solid ${stat.color}20`,
+                  }}
+                >
+                  <stat.icon
+                    size={16}
+                    className="transition-transform duration-300 group-hover:scale-110"
+                    style={{ color: stat.color }}
+                  />
+                </div>
+
+                {/* Text */}
+                <div className="relative z-10 text-left">
+                  <div
+                    className="text-2xl font-bold tracking-tight"
+                    style={{ color: stat.color }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="text-[10px] text-[#7a7589] uppercase tracking-widest leading-tight">
+                    {stat.label}
+                  </div>
+                </div>
+
+                {/* Corner glow */}
+                <div
+                  className="absolute -bottom-2 -right-2 w-16 h-16 rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none"
+                  style={{ backgroundColor: stat.color }}
+                />
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div variants={itemVariants} className="relative z-20 flex flex-wrap justify-center gap-2 mb-10 md:mb-12 px-2">
