@@ -227,11 +227,11 @@ export function Hero() {
               rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               whileHover={{ y: -5, scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
-              className="group relative z-20 p-3 rounded-xl glass border border-white/[0.08] hover:border-[#d63d4a]/40 transition-all duration-300 cursor-pointer"
+              className="group relative z-20 p-3 rounded-xl bg-[#e84855]/10 border border-[#e84855]/25 hover:bg-[#e84855]/20 hover:border-[#e84855]/50 transition-all duration-300 cursor-pointer"
+              style={{ boxShadow: '0 0 12px rgba(232,72,85,0.08)' }}
               aria-label={social.label}
             >
-              <social.icon size={19} className="text-[#9a95a8] group-hover:text-white transition-colors duration-300 relative z-10" />
-              <div className="absolute inset-0 rounded-xl bg-[#d63d4a]/0 group-hover:bg-[#d63d4a]/10 transition-all duration-400 pointer-events-none" style={{ boxShadow: '0 0 0 transparent' }} />
+              <social.icon size={19} className="text-[#e84855] group-hover:text-white transition-colors duration-300 relative z-10" />
             </motion.a>
           ))}
 
@@ -243,11 +243,11 @@ export function Hero() {
             }}
             whileHover={{ y: -5, scale: 1.08 }}
             whileTap={{ scale: 0.92 }}
-            className="group relative z-20 p-3 rounded-xl glass border border-white/[0.08] hover:border-[#d63d4a]/40 transition-all duration-300 cursor-pointer"
+            className="group relative z-20 p-3 rounded-xl bg-[#e84855]/10 border border-[#e84855]/25 hover:bg-[#e84855]/20 hover:border-[#e84855]/50 transition-all duration-300 cursor-pointer"
+            style={{ boxShadow: '0 0 12px rgba(232,72,85,0.08)' }}
             aria-label="Email Adarsh"
           >
-            <Mail size={19} className="text-[#9a95a8] group-hover:text-white transition-colors duration-300 relative z-10" />
-            <div className="absolute inset-0 rounded-xl bg-[#d63d4a]/0 group-hover:bg-[#d63d4a]/10 transition-all duration-400 pointer-events-none" />
+            <Mail size={19} className="text-[#e84855] group-hover:text-white transition-colors duration-300 relative z-10" />
           </motion.a>
         </motion.div>
 
