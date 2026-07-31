@@ -15,7 +15,7 @@ export function CustomCursor() {
 
     // Also hide on non-interactive elements, but restore on interactive ones
     const style = document.createElement('style');
-    style.textContent = \`
+    style.textContent = `
       html, body { cursor: none !important; }
       
       /* Force hide on all elements by default so spider takes over */
@@ -31,7 +31,7 @@ export function CustomCursor() {
       input, textarea, select {
         cursor: text !important;
       }
-    \`;
+    `;
     document.head.appendChild(style);
 
     return () => {
