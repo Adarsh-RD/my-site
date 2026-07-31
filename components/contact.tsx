@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Instagram, Phone } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
 import { SectionHeader } from '@/components/section-header';
 import {
@@ -55,6 +55,13 @@ export function Contact() {
       value: CONTACT_EMAIL,
       action: 'mail' as const,
       link: MAILTO_LINK,
+    },
+    {
+      icon: Phone,
+      label: 'Phone',
+      value: '+91 6361612811',
+      action: 'link' as const,
+      link: 'tel:+916361612811',
     },
     {
       icon: Instagram,

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Github, Linkedin, Mail, ArrowDown, Sparkles, Instagram, Rocket, FileText, Award } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowDown, Sparkles, Instagram, Rocket, FileText, Award, Phone } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
 import { openMailClient, MAILTO_LINK } from '@/lib/contact';
 import Image from 'next/image';
@@ -213,22 +213,47 @@ export function Hero() {
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="relative z-20 flex flex-wrap justify-center gap-2 mb-10 md:mb-12 px-2">
+        <motion.div variants={itemVariants} className="relative z-20 flex flex-wrap justify-center gap-2.5 mb-10 md:mb-12 px-2">
           {[
-            { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub', external: true },
-            { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn', external: true },
-            { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram', external: true },
+            { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub', color: '#ffffff', bg: 'rgba(255,255,255,0.08)', hoverBg: 'rgba(255,255,255,0.15)' },
+            { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn', color: '#0A66C2', bg: 'rgba(10,102,194,0.12)', hoverBg: 'rgba(10,102,194,0.22)' },
+            { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram', color: '#E4405F', bg: 'rgba(228,64,95,0.12)', hoverBg: 'rgba(228,64,95,0.22)' },
+            { icon: Phone, href: 'tel:+916361612811', label: 'Phone', color: '#22c55e', bg: 'rgba(34,197,94,0.12)', hoverBg: 'rgba(34,197,94,0.22)' },
           ].map((social) => (
             <motion.a
               key={social.label}
               href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -4 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative z-20 p-2.5 rounded-lg glass hover:glass-hover transition-all duration-300 text-[#7a7589] hover:text-[#d63d4a] cursor-pointer"
+              target={social.href.startsWith('http') ? '_blank' : undefined}
+              rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              whileHover={{ y: -5, scale: 1.1 }}
+              whileTap={{ scale: 0.92 }}
+              className="group relative z-20 p-3 rounded-xl transition-all duration-300 cursor-pointer"
+              style={{
+                background: social.bg,
+                border: `1px solid ${social.color}20`,
+              }}
+              aria-label={social.label}
             >
-              <social.icon size={18} />
+              <social.icon size={19} style={{ color: social.color }} className="transition-transform duration-300 group-hover:scale-110" />
+
+              {/* Glow on hover */}
+              <div
+                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+                style={{
+                  background: social.hoverBg,
+                  border: `1px solid ${social.color}40`,
+                  borderRadius: 'inherit',
+                  boxShadow: `0 0 20px ${social.color}25`,
+                }}
+              />
+
+              {/* Tooltip label */}
+              <span
+                className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[9px] font-medium tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none"
+                style={{ color: social.color }}
+              >
+                {social.label}
+              </span>
             </motion.a>
           ))}
 
@@ -238,12 +263,30 @@ export function Hero() {
               e.preventDefault();
               openMailClient();
             }}
-            whileHover={{ y: -4 }}
-            whileTap={{ scale: 0.95 }}
-            className="relative z-20 p-2.5 rounded-lg glass hover:glass-hover transition-all duration-300 text-[#7a7589] hover:text-[#d63d4a] cursor-pointer"
+            whileHover={{ y: -5, scale: 1.1 }}
+            whileTap={{ scale: 0.92 }}
+            className="group relative z-20 p-3 rounded-xl transition-all duration-300 cursor-pointer"
+            style={{
+              background: 'rgba(232,72,85,0.12)',
+              border: '1px solid rgba(232,72,85,0.2)',
+            }}
             aria-label="Email Adarsh"
           >
-            <Mail size={18} />
+            <Mail size={19} style={{ color: '#e84855' }} className="transition-transform duration-300 group-hover:scale-110" />
+
+            <div
+              className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+              style={{
+                background: 'rgba(232,72,85,0.22)',
+                border: '1px solid rgba(232,72,85,0.4)',
+                borderRadius: 'inherit',
+                boxShadow: '0 0 20px rgba(232,72,85,0.25)',
+              }}
+            />
+
+            <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[9px] font-medium tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none text-[#e84855]">
+              Email
+            </span>
           </motion.a>
         </motion.div>
 
