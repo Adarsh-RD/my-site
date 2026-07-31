@@ -298,19 +298,8 @@ export function FloatingObjects() {
         let angle = 0;
         if (pmx > -999) angle = Math.atan2(my - pmy, mx - pmx);
 
-        // Body pump offset (mode 1: button hover)
-        // sinVal: -1 (pulled back/up) to +1 (pushed forward/down)
-        const sinVal = Math.sin(timeRef.current * 8);
-        const pumpOffset = pump * sinVal * 18;
-        const bodyX = mx;
-        const bodyY = my + pumpOffset;
-
-        // Scale: big when back (sinVal=-1), small when forward (sinVal=+1)
-        // Range: 1.4 (back) to 0.6 (forward) during full pump
-        const pumpScale = pump > 0.1 ? 1 + pump * (-sinVal) * 0.4 : 1;
-
-        // Spider visibility: hide when jet is active
-        const spiderAlpha = 1 - jet;
+        // Spider visibility: hide when jet is active or when hovering buttons (pump)
+        const spiderAlpha = Math.max(0, 1 - Math.max(jet, pump));
 
         if (spiderAlpha > 0.05) {
           fgCtx.globalAlpha = spiderAlpha;
@@ -321,17 +310,17 @@ export function FloatingObjects() {
             .sort((a, b) => a.d - b.d)
             .slice(0, settings.legCount);
 
-          // Legs connect from body (which pumps) to dots (which stay)
+          // Legs connect from body to dots
           nearDots.forEach(({ i, d }, legIndex) => {
             const dot = dots[i];
             const alpha = (1 - d / settings.legRadius);
             const walkPhase = timeRef.current * 3 + legIndex * Math.PI / 3;
             const side = legIndex % 2 === 0 ? 1 : -1;
-            drawLeg(bodyX, bodyY, dot.x, dot.y, alpha, pump > 0.1 ? 0 : walkPhase, side);
+            drawLeg(mx, my, dot.x, dot.y, alpha, walkPhase, side);
           });
 
-          // Spider body: pumped position, scaled, faces down during pump
-          drawSpiderBody(bodyX, bodyY, pump > 0.1 ? Math.PI / 2 : angle, pumpScale);
+          // Spider body
+          drawSpiderBody(mx, my, angle, 1);
           fgCtx.globalAlpha = 1;
         }
 
