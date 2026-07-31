@@ -127,8 +127,8 @@ export function Hero() {
           <div className="flex sm:hidden items-center justify-center gap-1">
             {[
               { value: '5+', label: 'Projects', color: '#e84855' },
-              { value: '1', label: 'IEEE Paper', color: '#a855f7' },
-              { value: '3+', label: 'Certs', color: '#38bdf8' },
+              { value: '1', label: 'IEEE Paper', color: '#e84855' },
+              { value: '3+', label: 'Certs', color: '#e84855' },
             ].map((stat, index) => (
               <div key={stat.label} className="flex items-center gap-1">
                 {index > 0 && (
@@ -151,8 +151,8 @@ export function Hero() {
           <div className="hidden sm:flex flex-wrap justify-center gap-4">
             {[
               { value: '5+', label: 'Deployed Projects', icon: Rocket, color: '#e84855' },
-              { value: '1', label: 'IEEE Research Paper', icon: FileText, color: '#a855f7' },
-              { value: '3+', label: 'Industry Certs', icon: Award, color: '#38bdf8' },
+              { value: '1', label: 'IEEE Research Paper', icon: FileText, color: '#e84855' },
+              { value: '3+', label: 'Industry Certs', icon: Award, color: '#e84855' },
             ].map((stat) => (
               <motion.div
                 key={stat.label}
