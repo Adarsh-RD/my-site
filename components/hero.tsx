@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Github, Linkedin, Mail, ArrowDown, Sparkles, Instagram } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowDown, Sparkles, Instagram, Rocket, FileText, Award } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
 import { openMailClient, MAILTO_LINK } from '@/lib/contact';
 import Image from 'next/image';
@@ -116,21 +116,72 @@ export function Hero() {
 
         <motion.div variants={itemVariants} className="mb-8">
           <p className="text-sm sm:text-base md:text-lg text-[#7a7589] font-light tracking-wide max-w-lg px-2 leading-relaxed">
-            Building <span className="text-white font-medium">full-stack applications</span> &
-            <span className="text-white font-medium"> agentic AI systems</span> that ship
+            Crafting <span className="text-white font-medium">full-stack applications</span> &
+            <span className="text-white font-medium"> agentic AI systems</span> that deliver results
           </p>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 mb-10">
+        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-10 px-2">
           {[
-            { value: '5+', label: 'Deployed Projects' },
-            { value: '1', label: 'IEEE Research Paper' },
-            { value: '3+', label: 'Industry Certs' },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-gradient-primary">{stat.value}</div>
-              <div className="text-[10px] text-[#7a7589] uppercase tracking-widest mt-0.5">{stat.label}</div>
-            </div>
+            { value: '5+', label: 'Deployed Projects', icon: Rocket, color: '#e84855' },
+            { value: '1', label: 'IEEE Research Paper', icon: FileText, color: '#a855f7' },
+            { value: '3+', label: 'Industry Certs', icon: Award, color: '#38bdf8' },
+          ].map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              whileHover={{ y: -4, scale: 1.03 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              className="group relative flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 rounded-xl overflow-hidden"
+              style={{
+                background: 'rgba(10, 8, 16, 0.6)',
+                border: '1px solid rgba(255, 255, 255, 0.06)',
+                backdropFilter: 'blur(12px)',
+              }}
+            >
+              {/* Animated glow border on hover */}
+              <div
+                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background: `linear-gradient(135deg, ${stat.color}15, transparent 60%)`,
+                  border: `1px solid ${stat.color}35`,
+                  borderRadius: 'inherit',
+                }}
+              />
+
+              {/* Icon */}
+              <div
+                className="relative z-10 flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg transition-all duration-300"
+                style={{
+                  background: `${stat.color}12`,
+                  border: `1px solid ${stat.color}20`,
+                }}
+              >
+                <stat.icon
+                  size={16}
+                  className="transition-transform duration-300 group-hover:scale-110"
+                  style={{ color: stat.color }}
+                />
+              </div>
+
+              {/* Text */}
+              <div className="relative z-10 text-left">
+                <div
+                  className="text-xl sm:text-2xl font-bold tracking-tight"
+                  style={{ color: stat.color }}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-[9px] sm:text-[10px] text-[#7a7589] uppercase tracking-widest leading-tight">
+                  {stat.label}
+                </div>
+              </div>
+
+              {/* Corner glow */}
+              <div
+                className="absolute -bottom-2 -right-2 w-16 h-16 rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none"
+                style={{ backgroundColor: stat.color }}
+              />
+            </motion.div>
           ))}
         </motion.div>
 
