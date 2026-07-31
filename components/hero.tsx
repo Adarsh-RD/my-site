@@ -215,45 +215,23 @@ export function Hero() {
 
         <motion.div variants={itemVariants} className="relative z-20 flex flex-wrap justify-center gap-2.5 mb-10 md:mb-12 px-2">
           {[
-            { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub', color: '#ffffff', bg: 'rgba(255,255,255,0.08)', hoverBg: 'rgba(255,255,255,0.15)' },
-            { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn', color: '#0A66C2', bg: 'rgba(10,102,194,0.12)', hoverBg: 'rgba(10,102,194,0.22)' },
-            { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram', color: '#E4405F', bg: 'rgba(228,64,95,0.12)', hoverBg: 'rgba(228,64,95,0.22)' },
-            { icon: Phone, href: 'tel:+916361612811', label: 'Phone', color: '#22c55e', bg: 'rgba(34,197,94,0.12)', hoverBg: 'rgba(34,197,94,0.22)' },
+            { icon: Github, href: 'https://github.com/Adarsh-RD', label: 'GitHub' },
+            { icon: Linkedin, href: 'https://linkedin.com/in/adarshhhhhhrd/', label: 'LinkedIn' },
+            { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram' },
+            { icon: Phone, href: 'tel:+916361612811', label: 'Call' },
           ].map((social) => (
             <motion.a
               key={social.label}
               href={social.href}
               target={social.href.startsWith('http') ? '_blank' : undefined}
               rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              whileHover={{ y: -5, scale: 1.1 }}
+              whileHover={{ y: -5, scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
-              className="group relative z-20 p-3 rounded-xl transition-all duration-300 cursor-pointer"
-              style={{
-                background: social.bg,
-                border: `1px solid ${social.color}20`,
-              }}
+              className="group relative z-20 p-3 rounded-xl glass border border-white/[0.08] hover:border-[#d63d4a]/40 transition-all duration-300 cursor-pointer"
               aria-label={social.label}
             >
-              <social.icon size={19} style={{ color: social.color }} className="transition-transform duration-300 group-hover:scale-110" />
-
-              {/* Glow on hover */}
-              <div
-                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
-                style={{
-                  background: social.hoverBg,
-                  border: `1px solid ${social.color}40`,
-                  borderRadius: 'inherit',
-                  boxShadow: `0 0 20px ${social.color}25`,
-                }}
-              />
-
-              {/* Tooltip label */}
-              <span
-                className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[9px] font-medium tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none"
-                style={{ color: social.color }}
-              >
-                {social.label}
-              </span>
+              <social.icon size={19} className="text-[#9a95a8] group-hover:text-white transition-colors duration-300 relative z-10" />
+              <div className="absolute inset-0 rounded-xl bg-[#d63d4a]/0 group-hover:bg-[#d63d4a]/10 transition-all duration-400 pointer-events-none" style={{ boxShadow: '0 0 0 transparent' }} />
             </motion.a>
           ))}
 
@@ -263,30 +241,13 @@ export function Hero() {
               e.preventDefault();
               openMailClient();
             }}
-            whileHover={{ y: -5, scale: 1.1 }}
+            whileHover={{ y: -5, scale: 1.08 }}
             whileTap={{ scale: 0.92 }}
-            className="group relative z-20 p-3 rounded-xl transition-all duration-300 cursor-pointer"
-            style={{
-              background: 'rgba(232,72,85,0.12)',
-              border: '1px solid rgba(232,72,85,0.2)',
-            }}
+            className="group relative z-20 p-3 rounded-xl glass border border-white/[0.08] hover:border-[#d63d4a]/40 transition-all duration-300 cursor-pointer"
             aria-label="Email Adarsh"
           >
-            <Mail size={19} style={{ color: '#e84855' }} className="transition-transform duration-300 group-hover:scale-110" />
-
-            <div
-              className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
-              style={{
-                background: 'rgba(232,72,85,0.22)',
-                border: '1px solid rgba(232,72,85,0.4)',
-                borderRadius: 'inherit',
-                boxShadow: '0 0 20px rgba(232,72,85,0.25)',
-              }}
-            />
-
-            <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[9px] font-medium tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none text-[#e84855]">
-              Email
-            </span>
+            <Mail size={19} className="text-[#9a95a8] group-hover:text-white transition-colors duration-300 relative z-10" />
+            <div className="absolute inset-0 rounded-xl bg-[#d63d4a]/0 group-hover:bg-[#d63d4a]/10 transition-all duration-400 pointer-events-none" />
           </motion.a>
         </motion.div>
 
