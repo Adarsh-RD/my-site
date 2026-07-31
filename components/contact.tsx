@@ -27,24 +27,25 @@ export function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('sending');
     setFormError('');
 
     try {
-      await submitContactForm(formData);
+      // Build a detailed email body
+      const mailBody = `Hi Adarsh,\n\n${formData.message}\n\n---\nFrom: ${formData.name}\nEmail: ${formData.email}`;
+      const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(formData.subject || 'Hello Adarsh')}&body=${encodeURIComponent(mailBody)}`;
+      
+      // Trigger native email client
+      window.location.href = mailtoLink;
+      
       setFormStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setFormStatus('idle'), 5000);
     } catch (err) {
       setFormStatus('error');
-      const message = err instanceof Error ? err.message : 'Could not send right now.';
-      setFormError(
-        message.includes('RESEND_API_KEY')
-          ? 'Email service is not set up on the server yet. Use the button below to email directly.'
-          : `${message} Or email me at ${CONTACT_EMAIL}.`,
-      );
+      setFormError('Could not open email client. Please email me directly.');
     }
   };
 

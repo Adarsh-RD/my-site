@@ -443,4 +443,15 @@
   .link-hover-effect:hover::after {
     width: 100%;
   }
+
+  /* === BROWSER AUTOFILL OVERRIDE === */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #0a0810 inset !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.95) !important;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: rgba(255, 255, 255, 0.95);
+  }
 }
