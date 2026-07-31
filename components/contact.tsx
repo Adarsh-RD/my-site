@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Mail, MapPin, Send, Github, Linkedin, Instagram, Phone } from 'lucide-react';
 import { useTextScramble } from '@/hooks/use-text-scramble';
@@ -9,45 +9,12 @@ import {
   CONTACT_EMAIL,
   MAILTO_LINK,
   openMailClient,
-  submitContactForm,
 } from '@/lib/contact';
 
-type FormStatus = 'idle' | 'sending' | 'success' | 'error';
-
 export function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
-  const [formError, setFormError] = useState('');
-  const [focusedField, setFocusedField] = useState<string | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const heading = useTextScramble("Let's Connect", isInView, 30);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus('sending');
-    setFormError('');
-
-    try {
-      // Build a detailed email body
-      const mailBody = `Hi Adarsh,\n\n${formData.message}\n\n---\nFrom: ${formData.name}\nEmail: ${formData.email}`;
-      const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(formData.subject || 'Hello Adarsh')}&body=${encodeURIComponent(mailBody)}`;
-      
-      // Trigger native email client
-      window.location.href = mailtoLink;
-      
-      setFormStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setFormStatus('idle'), 5000);
-    } catch (err) {
-      setFormStatus('error');
-      setFormError('Could not open email client. Please email me directly.');
-    }
-  };
 
   const contactInfo = [
     {
@@ -86,13 +53,6 @@ export function Contact() {
     { icon: Instagram, href: 'https://www.instagram.com/_adxrshh.rd/', label: 'Instagram' },
   ];
 
-  const inputClasses = (field: string) =>
-    `w-full px-3.5 py-2.5 bg-transparent border rounded-lg text-white/95 placeholder-[#7a7589]/50 focus:outline-none transition-all duration-500 text-sm ${
-      focusedField === field
-        ? 'border-[#d63d4a]/45 shadow-[0_0_16px_rgba(214,61,74,0.08)]'
-        : 'border-white/[0.06] hover:border-white/12'
-    }`;
-
   return (
     <section id="contact" className="section-pad relative" ref={ref}>
       <div className="max-w-6xl mx-auto">
@@ -108,75 +68,28 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-3 relative z-20"
+            className="lg:col-span-3 relative z-20 flex flex-col justify-center items-start space-y-6 card-box p-8 lg:p-12 rounded-2xl"
           >
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[#7a7589] text-[10px] font-medium mb-1.5 uppercase tracking-wider">Name</label>
-                  <input type="text" name="name" value={formData.name} onChange={handleChange}
-                    onFocus={() => setFocusedField('name')} onBlur={() => setFocusedField(null)}
-                    required className={inputClasses('name')} placeholder="Your name" />
-                </div>
-                <div>
-                  <label className="block text-[#7a7589] text-[10px] font-medium mb-1.5 uppercase tracking-wider">Email</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange}
-                    onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)}
-                    required className={inputClasses('email')} placeholder="you@example.com" />
-                </div>
-              </div>
-              <div>
-                <label className="block text-[#7a7589] text-[10px] font-medium mb-1.5 uppercase tracking-wider">Subject</label>
-                <input type="text" name="subject" value={formData.subject} onChange={handleChange}
-                  onFocus={() => setFocusedField('subject')} onBlur={() => setFocusedField(null)}
-                  required className={inputClasses('subject')} placeholder="Project discussion" />
-              </div>
-              <div>
-                <label className="block text-[#7a7589] text-[10px] font-medium mb-1.5 uppercase tracking-wider">Message</label>
-                <textarea name="message" value={formData.message} onChange={handleChange}
-                  onFocus={() => setFocusedField('message')} onBlur={() => setFocusedField(null)}
-                  required rows={4} className={`${inputClasses('message')} resize-none`}
-                  placeholder="Tell me about your project..." />
-              </div>
-              <motion.button
-                whileHover={formStatus !== 'sending' ? { scale: 1.02 } : undefined}
-                whileTap={formStatus !== 'sending' ? { scale: 0.98 } : undefined}
-                type="submit"
-                disabled={formStatus === 'sending'}
-                className="group w-full py-3 bg-gradient-to-r from-[#d63d4a] to-[#a8323f] text-white rounded-lg font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 glow-red hover:glow-red-intense transition-all duration-500 magnetic-element disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                <Send
-                  size={16}
-                  className={`transition-transform ${formStatus === 'sending' ? 'animate-pulse' : 'group-hover:translate-x-1 group-hover:-translate-y-1'}`}
-                />
-                {formStatus === 'sending' ? 'Sending…' : 'Send Message'}
-              </motion.button>
-              {formStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-center py-3 rounded-xl glass text-sm text-emerald-400"
-                >
-                  ✓ Message sent — check your inbox for my reply.
-                </motion.div>
-              )}
-              {formStatus === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-center py-3 rounded-xl glass text-sm text-[#d63d4a]"
-                >
-                  {formError}{' '}
-                  <button
-                    type="button"
-                    onClick={openMailClient}
-                    className="underline hover:text-white transition-colors"
-                  >
-                    Open email
-                  </button>
-                </motion.div>
-              )}
-            </form>
+            <div className="space-y-2">
+              <h3 className="text-2xl font-bold text-white/95">Got a project in mind?</h3>
+              <p className="text-[#7a7589] text-sm leading-relaxed max-w-md">
+                I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. Skip the forms and send me an email directly.
+              </p>
+            </div>
+            
+            <motion.a
+              href={MAILTO_LINK}
+              onClick={(e) => {
+                e.preventDefault();
+                openMailClient();
+              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group inline-flex py-3.5 px-8 bg-gradient-to-r from-[#d63d4a] to-[#a8323f] text-white rounded-lg font-medium text-xs tracking-wider uppercase items-center justify-center gap-2 glow-red hover:glow-red-intense transition-all duration-500 magnetic-element"
+            >
+              <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              Direct Email
+            </motion.a>
           </motion.div>
 
           <motion.div
