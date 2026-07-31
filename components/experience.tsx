@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
@@ -83,20 +83,8 @@ export function Experience() {
       degree: 'B.E. in Computer Science & Artificial Intelligence',
       school: 'KLE Technological University, Hubli',
       year: '2023 — 2027',
-      details: 'CGPA: 8.45 / 10.0',
+      details: '',
       coursework: 'DSA, OS, DBMS, ML, Generative AI, Computer Networks, Software Engineering',
-    },
-    {
-      degree: 'Class XII (KSEAB) — 94.4%',
-      school: 'SMT S S Pattepur PU College, Ramdurg',
-      year: '2021 — 2023',
-      details: 'State Board Examination',
-    },
-    {
-      degree: 'Class X (KSEAB) — 95.68%',
-      school: 'GOVT Adarsha Vidyalaya RMSA, Katkol',
-      year: '2016 — 2021',
-      details: 'State Board Examination',
     },
   ];
 
@@ -230,7 +218,7 @@ export function Experience() {
                 >
                   <h4 className="text-xs sm:text-sm font-semibold text-white/95 mb-1.5 leading-snug">{edu.degree}</h4>
                   <p className="text-[#7a7589] text-[11px] mb-0.5">{edu.school}</p>
-                  <p className="text-[#7a7589]/80 text-[11px]">{edu.details}</p>
+                  {edu.details && <p className="text-[#7a7589]/80 text-[11px]">{edu.details}</p>}
                   {edu.coursework && (
                     <p className="text-[#7a7589]/60 text-[10px] mt-1.5 italic leading-snug">Coursework: {edu.coursework}</p>
                   )}
@@ -251,7 +239,7 @@ export function Experience() {
               </h3>
             </div>
             <p className="text-[#7a7589]/70 text-[11px] max-w-md leading-relaxed">
-              Hackathons, research, industry certs, and hands-on engineering outside the classroom.
+              Hackathons, research, industry certs, and hands-on engineering beyond the day job.
             </p>
           </div>
 

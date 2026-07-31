@@ -41,7 +41,7 @@ export function Footer() {
               <SiteLogo />
             </div>
             <p className="text-[#7a7589] text-xs leading-relaxed">
-              B.E. CS & AI student at KLE Tech, Hubli. Building full-stack apps and agentic AI systems.
+              Full-stack developer & AI engineer based in Hubli, India. Building apps and agentic AI systems.
             </p>
           </motion.div>
 

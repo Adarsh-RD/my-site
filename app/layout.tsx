@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Adarsh R D — CS & AI Engineer',
-  description: 'Portfolio of Adarsh R D, a Computer Science & AI Engineering student at KLE Technological University, specializing in full-stack development, machine learning, and agentic AI systems.',
+  title: 'Adarsh R D — Full-Stack Developer & AI Engineer',
+  description: 'Portfolio of Adarsh R D, a full-stack developer and AI engineer specializing in web applications, machine learning, and agentic AI systems.',
   generator: 'Next.js',
   icons: {
     icon: [

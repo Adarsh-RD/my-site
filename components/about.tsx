@@ -14,15 +14,15 @@ export function About() {
   const features = [
     { icon: Brain, title: 'Curious by nature', desc: 'Always picking up new ideas and tools' },
     { icon: Code2, title: 'Ship-first mindset', desc: 'Ideas matter when they work in the real world' },
-    { icon: Zap, title: 'Team player', desc: 'Hackathons, clubs, and builds with friends' },
-    { icon: Layers, title: 'Beyond code', desc: 'Drones at AeroKLE, movies, campus life' },
+    { icon: Zap, title: 'Team player', desc: 'Hackathons, open-source, and cross-team builds' },
+    { icon: Layers, title: 'Beyond code', desc: 'Drones, side projects, and continuous learning' },
   ];
 
   const stats = [
-    { value: '8.45', label: 'CGPA at KLE Tech' },
-    { value: '94.4%', label: 'Class XII (KSEAB)' },
-    { value: '95.68%', label: 'Class X (KSEAB)' },
     { value: '5+', label: 'Deployed Projects' },
+    { value: '1', label: 'IEEE Research Paper' },
+    { value: '3+', label: 'Industry Certifications' },
+    { value: '2+', label: 'Hackathon Wins' },
   ];
 
   return (
@@ -43,7 +43,7 @@ export function About() {
             className="lg:col-span-3 space-y-4"
           >
             <p className="body-text">
-              I&apos;m Adarsh R D — a B.E. Computer Science & AI student at KLE Technological University, Hubli. I&apos;m the kind of person who gets hooked on a problem and won&apos;t stop until something real ships: a web app classmates can use, an AI tool that actually saves time, or a weekend hackathon idea that turns into a live project.
+              I&apos;m Adarsh R D — a full-stack developer and AI engineer based in Hubli, India. I get hooked on hard problems and won&apos;t stop until something real ships: a production web app, an AI tool that actually saves time, or a hackathon idea that turns into a live product.
             </p>
 
             <p className="body-text">
@@ -51,7 +51,7 @@ export function About() {
             </p>
 
             <p className="body-text">
-              Competitions and campus life keep me grounded — Smart India Hackathon 2025, runner-up at IgniTrix 2026, research on AI video restoration, and drone builds with AeroKLE when I need a break from the editor. If you&apos;re looking for someone curious, reliable, and genuinely excited to build — I&apos;d love to connect.
+              Beyond client work, I stay sharp through hackathons (runner-up at IgniTrix 2026, Smart India Hackathon 2025), published research on AI video restoration, and drone engineering when I need a break from the editor. If you&apos;re looking for someone curious, reliable, and genuinely excited to build — let&apos;s talk.
             </p>
 
             <div className="grid grid-cols-2 gap-3 pt-4">

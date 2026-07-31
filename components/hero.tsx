@@ -71,7 +71,7 @@ export function Hero() {
         <motion.div variants={itemVariants} className="mb-6 md:mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[9px] sm:text-[10px] font-medium text-[#7a7589] tracking-wider uppercase max-w-[90vw] text-center">
             <Sparkles size={12} className="text-[#d63d4a]" />
-            B.E. in Computer Science & Artificial Intelligence
+            Full-Stack Developer & AI Engineer
           </div>
         </motion.div>
 
@@ -117,14 +117,15 @@ export function Hero() {
         <motion.div variants={itemVariants} className="mb-8">
           <p className="text-sm sm:text-base md:text-lg text-[#7a7589] font-light tracking-wide max-w-lg px-2 leading-relaxed">
             Building <span className="text-white font-medium">full-stack applications</span> &
-            <span className="text-white font-medium"> agentic AI systems</span> at KLE Tech, Hubli
+            <span className="text-white font-medium"> agentic AI systems</span> that ship
           </p>
         </motion.div>
 
         <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 mb-10">
           {[
-            { value: '8.45', label: 'CGPA' },
-            { value: '5+', label: 'Projects' },
+            { value: '5+', label: 'Deployed Projects' },
+            { value: '1', label: 'IEEE Research Paper' },
+            { value: '3+', label: 'Industry Certs' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-2xl sm:text-3xl font-bold text-gradient-primary">{stat.value}</div>

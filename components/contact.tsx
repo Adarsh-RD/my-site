@@ -91,7 +91,7 @@ export function Contact() {
         <SectionHeader
           number="05"
           title={heading || "Let's Connect"}
-          subtitle="Open to internships, collaborations, and cool projects. Let's build something."
+          subtitle="Open to collaborations, freelance, and exciting projects. Let's build something."
         />
 
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
