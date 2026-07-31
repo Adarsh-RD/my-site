@@ -234,7 +234,13 @@ export function Contact() {
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ x: 4 }}
                   className={className}
-                  onClick={info.link === '#' ? (e) => e.preventDefault() : undefined}
+                  onClick={(e) => {
+                    if (info.link === '#') e.preventDefault();
+                    if (info.label === 'Phone') {
+                      navigator.clipboard.writeText('+916361612811');
+                      alert('Phone number copied to clipboard: +91 6361612811');
+                    }
+                  }}
                 >
                   {inner}
                 </motion.a>

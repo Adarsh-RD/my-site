@@ -225,6 +225,10 @@ export function Hero() {
               href={social.href}
               target={social.href.startsWith('http') ? '_blank' : undefined}
               rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              onClick={social.label === 'Call' ? () => {
+                navigator.clipboard.writeText('+916361612811');
+                alert('Phone number copied to clipboard: +91 6361612811');
+              } : undefined}
               whileHover={{ y: -5, scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
               className="group relative z-20 p-3 rounded-xl bg-[#e84855]/10 border border-[#e84855]/25 hover:bg-[#e84855]/20 hover:border-[#e84855]/50 transition-all duration-300 cursor-pointer"
